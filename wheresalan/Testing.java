@@ -9,8 +9,18 @@ import game.*;
 
 public class Testing {
 	public static void main(String[] args) {
-		Game game = new Game(1, 1);
+		
+		/*
 		System.out.println(game.aCards.get(0).name);
 		game.idCards.displayContents();
+		*/
+		int i, j;
+		
+		for (j=0; j<10;j++) {
+			Game game = new Game(6, 6);
+			for (i=0;i<game.gameSize;i++) {
+				System.out.println(game.turnOrder[i].identity);
+			}
+		}
 	}
 }

@@ -1,11 +1,13 @@
 package player;
 
+import card.*;
+
 public class Intel {
-	Team team;
+	CardTeam team;
 	Characters character;
 	
 	public Intel() {
-		this.team = Team.UNKNOWN;
+		this.team = CardTeam.UNKNOWN;
 		this.character = Characters.UNKNOWN;
 	}
 }
