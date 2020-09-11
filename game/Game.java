@@ -66,8 +66,6 @@ public class Game {
 			sizeTony--;
 		}
 		
-		System.out.println("Player is: "+ player.identity);
-		
 		if (player.identity != "Tony") {
 			this.turnOrder[0] = new TonyAI(tCards.remove(0));
 			sizeTony--;
@@ -92,7 +90,6 @@ public class Game {
 		}
 		
 		for (i=1; i<gameSize; i++) {
-			System.out.println(playerSpot);
 			if ((i == playerSpot)){
 				this.turnOrder[i] = player;
 			} else if ((i == alanSpot) && (alanSpot != playerSpot)) {
@@ -118,7 +115,21 @@ public class Game {
 				}				
 			}
 		}
-		/* End of Initialization */
+		
+		/* Start of Intel Initialization */
+		this.publicIntel = new Intel[gameSize];
+		for (i=0; i<gameSize; i++) {
+			this.publicIntel[i] = new Intel();
+		}
+		this.publicIntel[0].team = CardTeam.TONY;
+		this.publicIntel[0].character = Characters.TONY;
+		for (i=0; i<gameSize; i++) {
+			System.arraycopy(publicIntel, 0, this.turnOrder[i].intel, 0, gameSize);
+			if (i != 0) {
+				this.turnOrder[i].intel[i].character = this.turnOrder[i].idcard.character;
+				this.turnOrder[i].intel[i].team = this.turnOrder[i].team;
+			}
+		}
 		
 
 	}
