@@ -14,14 +14,11 @@ public class Testing {
 		System.out.println(game.aCards.get(0).name);
 		game.idCards.displayContents();
 		*/
-		int i,j;
+		int i;
 		
-		Game game = new Game(6, 6);
+		Game game = new Game(1, 1);
 		for (i=0;i<game.gameSize;i++) {
-			System.out.println(game.turnOrder[i].identity + "'s Intel:");
-			for (j=0; j<game.gameSize;j++) {
-				System.out.println(game.turnOrder[i].intel[j].character);
-			}
+			System.out.println(game.turnOrder[i].identity);
 		}
 	}
 }

@@ -57,32 +57,50 @@ public class Game {
 		Human player = null;
 		int playerSpot;
 		if (teamRand == 0) {
-			charRand = rand.nextInt(aCards.size());
-			player = new Human(aCards.remove(charRand));
-			sizeAlan--;
+			if (sizeAlan == 1) {
+				player = new Human(aCards.remove(0));
+				sizeAlan--;
+			} else {
+				charRand = rand.nextInt(aCards.size());
+				player = new Human(aCards.remove(charRand));
+				sizeAlan--;
+			}
 		} else if (teamRand == 1) {
-			charRand = rand.nextInt(tCards.size());
-			player = new Human(tCards.remove(charRand));
-			sizeTony--;
+			if (sizeTony == 1) {
+				player = new Human(tCards.remove(0));
+				sizeTony--;
+			} else {
+				charRand = rand.nextInt(tCards.size());
+				player = new Human(tCards.remove(charRand));
+				sizeTony--;
+			}
 		}
 		
-		if (player.identity != "Tony") {
+		if (!player.identity.equals("Tony")) {
 			this.turnOrder[0] = new TonyAI(tCards.remove(0));
 			sizeTony--;
-			playerSpot = rand.nextInt((gameSize - 1)) + 1;
+			if (gameSize == 2) {
+				playerSpot = 1;
+			} else {
+				playerSpot = rand.nextInt((gameSize - 1)) + 1;
+			}
 		} else {
 			playerSpot = 0;
 			this.turnOrder[0] = player;
 		}
 		
 		int alanSpot;
-		
 		Player alan = null;
-		if (player.identity != "Alan") {
-			alanSpot = rand.nextInt((gameSize - 1)) + 1;
-			while (alanSpot == playerSpot) {
+		
+		if (!player.identity.equals("Alan")) {
+			if (gameSize == 2) {
+				alanSpot = 1;
+			} else {
 				alanSpot = rand.nextInt((gameSize - 1)) + 1;
-			}
+				while (alanSpot == playerSpot) {
+					alanSpot = rand.nextInt((gameSize - 1)) + 1;
+				}
+			}		
 			alan = new AI(aCards.remove(0));
 			sizeAlan--;
 		} else {
@@ -116,7 +134,7 @@ public class Game {
 			}
 		}
 		
-		/* Start of Intel Initialization */
+		/* Intel Initialization */
 		this.publicIntel = new Intel[gameSize];
 		for (i=0; i<gameSize; i++) {
 			this.publicIntel[i] = new Intel();
@@ -124,15 +142,17 @@ public class Game {
 		this.publicIntel[0].team = CardTeam.TONY;
 		this.publicIntel[0].character = Characters.TONY;
 		for (i=0; i<gameSize; i++) {
-			System.arraycopy(publicIntel, 0, this.turnOrder[i].intel, 0, gameSize);
+			this.turnOrder[i].intel[0].character = Characters.TONY;
+			this.turnOrder[i].intel[0].team = CardTeam.TONY;
 			if (i != 0) {
 				this.turnOrder[i].intel[i].character = this.turnOrder[i].idcard.character;
 				this.turnOrder[i].intel[i].team = this.turnOrder[i].team;
 			}
-		}
+		}	
 		
-
 	}
+	
+	
 	
 	public void updateDay() {
 		this.day = this.nextDay;
