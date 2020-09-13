@@ -26,9 +26,9 @@ public class Game {
 	
 	public Player[] turnOrder;
 	
-	public Game(int sizeAnatole, int sizeTony) {
+	public Game(int sizeAnatole, int sizeToby) {
 		Random rand = new Random();
-		gameSize = sizeAnatole + sizeTony;
+		gameSize = sizeAnatole + sizeToby;
 		int teamRand, charRand;
 		
 		/* Initialize Decks and Board */
@@ -66,19 +66,19 @@ public class Game {
 				sizeAnatole--;
 			}
 		} else if (teamRand == 1) {
-			if (sizeTony == 1) {
+			if (sizeToby == 1) {
 				player = new Human(tCards.remove(0));
-				sizeTony--;
+				sizeToby--;
 			} else {
 				charRand = rand.nextInt(tCards.size());
 				player = new Human(tCards.remove(charRand));
-				sizeTony--;
+				sizeToby--;
 			}
 		}
 		
 		if (!player.identity.equals("Tony")) {
 			this.turnOrder[0] = new TobyAI(tCards.remove(0));
-			sizeTony--;
+			sizeToby--;
 			if (gameSize == 2) {
 				this.playerSpot = 1;
 			} else {
@@ -121,12 +121,12 @@ public class Game {
 				} else if ((teamRand == 0) && (sizeAnatole == 0)){
 					charRand = rand.nextInt(tCards.size());
 					this.turnOrder[i] = new AI(tCards.remove(charRand));
-					sizeTony--;
-				} else if ((teamRand == 1) && (sizeTony > 0)) {
+					sizeToby--;
+				} else if ((teamRand == 1) && (sizeToby > 0)) {
 					charRand = rand.nextInt(tCards.size());
 					this.turnOrder[i] = new AI(tCards.remove(charRand));
-					sizeTony--;
-				} else if ((teamRand == 1) && (sizeTony == 0)) {
+					sizeToby--;
+				} else if ((teamRand == 1) && (sizeToby == 0)) {
 					charRand = rand.nextInt(aCards.size());
 					this.turnOrder[i] = new AI(aCards.remove(charRand));
 					sizeAnatole--;
