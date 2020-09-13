@@ -1,4 +1,4 @@
-package card.alancards;
+package card.anatolecards;
 
 import card.Card;
 import card.CardAI;

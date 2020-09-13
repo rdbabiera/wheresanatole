@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import card.*;
-import card.alancards.*;
+import card.anatolecards.*;
 import card.maindeck.*;
 import card.shop.*;
 import player.Characters;
@@ -153,7 +153,7 @@ public class Deck {
 						case "World Fair":
 							temp = new WorldFair(name, desc, team, character, pType, cost, cAI);
 							break;
-						case "Tony the Uber Driver":
+						case "Toby the Uber Driver":
 							temp = new Uber(name, desc, team, character, pType, cost, cAI);
 							break;
 						case "Exit Strategy":

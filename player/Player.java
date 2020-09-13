@@ -35,4 +35,6 @@ public abstract class Player {
 	}
 
 	/* Subroutines */
+	abstract public void playTurn();
+	abstract public int promptToby(int gameSize);
 }

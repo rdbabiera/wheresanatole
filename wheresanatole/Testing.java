@@ -1,4 +1,4 @@
-package wheresalan;
+package wheresanatole;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

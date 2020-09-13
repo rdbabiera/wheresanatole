@@ -1,5 +1,5 @@
 package card;
 
 public enum CardTeam {
-	GENERAL, TONY, ALAN, UNKNOWN;
+	GENERAL, TOBY, ANATOLE, UNKNOWN;
 }

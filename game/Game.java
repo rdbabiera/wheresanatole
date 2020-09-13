@@ -13,25 +13,26 @@ public class Game {
 	public Day day;
 	public Day nextDay;
 	public Intel[] publicIntel;
-	public Deck alanCards;
+	public Deck anatoleCards;
 	public Deck discardPile;
 	public Deck drawnSpecials;
 	public Deck idCards;
 	public Deck mainDeck;
 	public Deck shop;
+	public int playerSpot;
 	
 	public ArrayList<Card> aCards;
 	public ArrayList<Card> tCards;
 	
 	public Player[] turnOrder;
 	
-	public Game(int sizeAlan, int sizeTony) {
+	public Game(int sizeAnatole, int sizeTony) {
 		Random rand = new Random();
-		gameSize = sizeAlan + sizeTony;
+		gameSize = sizeAnatole + sizeTony;
 		int teamRand, charRand;
 		
 		/* Initialize Decks and Board */
-		this.alanCards = new Deck("alancards.csv");
+		this.anatoleCards = new Deck("anatolecards.csv");
 		this.discardPile = new Deck("discard");
 		this.drawnSpecials = new Deck("discard");
 		this.idCards = new Deck("identitycards.csv");
@@ -46,24 +47,23 @@ public class Game {
 		this.aCards = new ArrayList<Card>();
 		this.tCards = new ArrayList<Card>();
 		for (i=11; i>=0; i--) {
-			if (this.idCards.deck.get(i).team == CardTeam.ALAN) {
+			if (this.idCards.deck.get(i).team == CardTeam.ANATOLE) {
 				this.aCards.add(this.idCards.removeCard(i));
-			} else if (this.idCards.deck.get(i).team == CardTeam.TONY) {
+			} else if (this.idCards.deck.get(i).team == CardTeam.TOBY) {
 				this.tCards.add(this.idCards.removeCard(i));
 			}
 		}
 				
 		teamRand = rand.nextInt(2);
 		Human player = null;
-		int playerSpot;
 		if (teamRand == 0) {
-			if (sizeAlan == 1) {
+			if (sizeAnatole == 1) {
 				player = new Human(aCards.remove(0));
-				sizeAlan--;
+				sizeAnatole--;
 			} else {
 				charRand = rand.nextInt(aCards.size());
 				player = new Human(aCards.remove(charRand));
-				sizeAlan--;
+				sizeAnatole--;
 			}
 		} else if (teamRand == 1) {
 			if (sizeTony == 1) {
@@ -77,48 +77,48 @@ public class Game {
 		}
 		
 		if (!player.identity.equals("Tony")) {
-			this.turnOrder[0] = new TonyAI(tCards.remove(0));
+			this.turnOrder[0] = new TobyAI(tCards.remove(0));
 			sizeTony--;
 			if (gameSize == 2) {
-				playerSpot = 1;
+				this.playerSpot = 1;
 			} else {
-				playerSpot = rand.nextInt((gameSize - 1)) + 1;
+				this.playerSpot = rand.nextInt((gameSize - 1)) + 1;
 			}
 		} else {
-			playerSpot = 0;
+			this.playerSpot = 0;
 			this.turnOrder[0] = player;
 		}
 		
-		int alanSpot;
-		Player alan = null;
+		int anatoleSpot;
+		Player anatole = null;
 		
-		if (!player.identity.equals("Alan")) {
+		if (!player.identity.equals("anatole")) {
 			if (gameSize == 2) {
-				alanSpot = 1;
+				anatoleSpot = 1;
 			} else {
-				alanSpot = rand.nextInt((gameSize - 1)) + 1;
-				while (alanSpot == playerSpot) {
-					alanSpot = rand.nextInt((gameSize - 1)) + 1;
+				anatoleSpot = rand.nextInt((gameSize - 1)) + 1;
+				while (anatoleSpot == this.playerSpot) {
+					anatoleSpot = rand.nextInt((gameSize - 1)) + 1;
 				}
 			}		
-			alan = new AI(aCards.remove(0));
-			sizeAlan--;
+			anatole = new AI(aCards.remove(0));
+			sizeAnatole--;
 		} else {
-			alanSpot = playerSpot;
+			anatoleSpot = this.playerSpot;
 		}
 		
 		for (i=1; i<gameSize; i++) {
-			if ((i == playerSpot)){
+			if ((i == this.playerSpot)){
 				this.turnOrder[i] = player;
-			} else if ((i == alanSpot) && (alanSpot != playerSpot)) {
-				this.turnOrder[i] = alan;
+			} else if ((i == anatoleSpot) && (anatoleSpot != this.playerSpot)) {
+				this.turnOrder[i] = anatole;
 			} else {
 				teamRand = rand.nextInt(2);
-				if ((teamRand == 0) && (sizeAlan > 0)) {
+				if ((teamRand == 0) && (sizeAnatole > 0)) {
 					charRand = rand.nextInt(aCards.size());
 					this.turnOrder[i] = new AI(aCards.remove(charRand));
-					sizeAlan--;
-				} else if ((teamRand == 0) && (sizeAlan == 0)){
+					sizeAnatole--;
+				} else if ((teamRand == 0) && (sizeAnatole == 0)){
 					charRand = rand.nextInt(tCards.size());
 					this.turnOrder[i] = new AI(tCards.remove(charRand));
 					sizeTony--;
@@ -129,7 +129,7 @@ public class Game {
 				} else if ((teamRand == 1) && (sizeTony == 0)) {
 					charRand = rand.nextInt(aCards.size());
 					this.turnOrder[i] = new AI(aCards.remove(charRand));
-					sizeAlan--;
+					sizeAnatole--;
 				}				
 			}
 		}
@@ -139,11 +139,11 @@ public class Game {
 		for (i=0; i<gameSize; i++) {
 			this.publicIntel[i] = new Intel();
 		}
-		this.publicIntel[0].team = CardTeam.TONY;
+		this.publicIntel[0].team = CardTeam.TOBY;
 		this.publicIntel[0].character = Characters.TONY;
 		for (i=0; i<gameSize; i++) {
 			this.turnOrder[i].intel[0].character = Characters.TONY;
-			this.turnOrder[i].intel[0].team = CardTeam.TONY;
+			this.turnOrder[i].intel[0].team = CardTeam.TOBY;
 			if (i != 0) {
 				this.turnOrder[i].intel[i].character = this.turnOrder[i].idcard.character;
 				this.turnOrder[i].intel[i].team = this.turnOrder[i].team;
@@ -152,7 +152,13 @@ public class Game {
 		
 	}
 	
-	
+	public void startDay() {
+		int currentTurn = 0;
+		while (currentTurn < gameSize) {
+			/* Method to prompt */
+			currentTurn++;
+		}
+	}
 	
 	public void updateDay() {
 		this.day = this.nextDay;

@@ -1,8 +1,8 @@
-package wheresalan;
+package wheresanatole;
 
 import java.util.Scanner;
 
-public class WheresAlan {
+public class WheresAnatole {
 	static Scanner userPrompt = new Scanner(System.in);
 	public static int temp;
 	public static int sizeAlan = 1;

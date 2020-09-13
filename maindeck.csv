@@ -1,27 +1,27 @@
-Ace,Select a random number of players at the table. If all of them are on the same team their identities are revealed to all disciplinary committee members.,TONY,CHANG,REVEAL,0,HELP
-Backstab,A chosen player's identity is revealed to the entire table.,TONY,RD,REVEAL,0,INTEL
-Ban Hammer,You kick a player out of the game. You bypass Alan's alibi and win should he be chosen.,TONY,TREVOR,REVEAL,0,KILL
+Ace,Select a random number of players at the table. If all of them are on the same team their identities are revealed to all disciplinary committee members.,TOBY,CHANG,REVEAL,0,HELP
+Backstab,A chosen player's identity is revealed to the entire table.,TOBY,DRIZ,REVEAL,0,INTEL
+Ban Hammer,You kick a player out of the game. You bypass Anatole's alibi and win should he be chosen.,TOBY,TRAVY,REVEAL,0,KILL
 Bash Tax,Steal a card from a player.,GENERAL,ALL,REVEAL,0,HARM
 Blank,Does nothing.,GENERAL,ALL,TRADE,0,NONE
-Breach and Clear,Nobody will be able to draw cards for the next two turns except for Miller and revealed disciplinary members.,TONY,MILLER,REVEAL,0,HARM
+Breach and Clear,Nobody will be able to draw cards for the next two turns except for Miller and revealed disciplinary members.,TOBY,NATTY,REVEAL,0,HARM
 Cancel Culture,Remove a player from school for a day.,GENERAL,ALL,REVEAL,0,HARM
 Clout,Currency for Pay-to-Win Cards.,GENERAL,ALL,REVEAL,0,BUY
 Cough Card,Skip the next player's turn.,GENERAL,ALL,REVEAL,0,HARM
-Defuse Kit,All bombs are defused and discarded. Draw a card for every bomb defused.,TONY,ALL,REVEAL,0,HELP
+Defuse Kit,All bombs are defused and discarded. Draw a card for every bomb defused.,TOBY,ALL,REVEAL,0,HELP
 Drop Me T4?,You may donate any amount of cards to a chosen player,GENERAL,ALL,REVEAL,0,HELP
 Early Dismissal,End the day early.,GENERAL,ALL,REVEAL,0,HARM
-Escape,Each player is allowed the option to skip school for the rest of the day.,ALAN,ROBERT,REVEAL,0,HELP
-Ghost Sauce,You cannot play cards when this card is given to you by Krishna.,TONY,KRISHNA,TRADE,0,HARM
-IT'S ME,All players cannot play cards for two days.,ALAN,REMY,REVEAL,0,HARM
+Escape,Each player is allowed the option to skip school for the rest of the day.,ALAN,CUERVO,REVEAL,0,HELP
+Ghost Sauce,You cannot play cards when this card is given to you by Krishna.,TOBY,KRIS,TRADE,0,HARM
+IT'S ME,All players cannot play cards for two days.,ALAN,PARKER,REVEAL,0,HARM
 Kenneth I'm Sorry,Your identity is revealed to the entire table when drawn.,GENERAL,ALL,DISCOVER,0,NONE
-La Montagne,All disciplinary commitee members are revealed to non disciplinary commitee members.,ALAN,RILEY,REVEAL,0,HELP
-Pink Slip,If called on by Tony then the player refuses to reveal themselves AND they are immune to being called on for 3 turns.,ALAN,GARY,TRADE,0,SAVE
-Radar Jammer,Trading is banned for the day.,TONY,TONY,REVEAL,0,HARM
-Reported,All cards being traded must be revealed for a day. ,TONY,ALL,REVEAL,0,HELP
+La Montagne,All disciplinary commitee members are revealed to non disciplinary commitee members.,ALAN,JOHNSON,REVEAL,0,HELP
+Pink Slip,If called on by Toby then the player refuses to reveal themselves AND they are immune to being called on for 3 turns.,ALAN,GURBUR,TRADE,0,SAVE
+Radar Jammer,Trading is banned for the day.,TOBY,TOBY,REVEAL,0,HARM
+Reported,All cards being traded must be revealed for a day. ,TOBY,ALL,REVEAL,0,HELP
 Snack Bomb,You are removed from the game if you do not trade this card by the end of the next day.,GENERAL,ALL,TRADE,0,BOMB
-Spasm,Each player draws a new identity excluding Tony.,GENERAL,ALL,REVEAL,0,BOTH
-Stink Bomb,If called on by Tony then the player is removed from school for two days. Their identity is safe and Tony is also removed from the game for two days.,GENERAL,ERNESTO,TRADE,0,SAVE
-Suspension,Class-specific abilities are banned for two days.,TONY,TONY,REVEAL,0,HARM
+Spasm,Each player draws a new identity excluding Toby.,GENERAL,ALL,REVEAL,0,BOTH
+Stink Bomb,If called on by Toby then the player is removed from school for two days. Their identity is safe and Toby is also removed from the game for two days.,GENERAL,BERNIE,TRADE,0,SAVE
+Suspension,Class-specific abilities are banned for two days.,TOBY,TOBY,REVEAL,0,HARM
 Walled Off,Force a player to discard a random card.,GENERAL,ALL,REVEAL,0,HARM
 Weekend at Bernie's,Swap hands with another player.,GENERAL,ALL,REVEAL,0,HELP
-Yapstone,If Alan has 3 Yapstones then he may purchase a History Paper.,ALAN,ALAN,HELD,0,ALAN
+Yapstone,If Anatole has 3 Yapstones then he may purchase a History Paper.,ALAN,ANATOLE,HELD,0,ANATOLE
