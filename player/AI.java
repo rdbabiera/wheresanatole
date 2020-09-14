@@ -1,15 +1,16 @@
 package player;
 
 import card.Card;
+import game.*;
 
 public class AI extends Player {
 
-	public AI(Card idcard) {
-		super(idcard);
+	public AI(Card idcard, int gameSize) {
+		super(idcard, gameSize);
 		// TODO Auto-generated constructor stub
 	}
 
-	public void playTurn() {
+	public void playTurn(Game game) {
 		
 	}
 

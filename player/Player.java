@@ -1,5 +1,6 @@
 package player;
 import card.*;
+import game.*;
 
 public abstract class Player {
 	int i;
@@ -14,7 +15,7 @@ public abstract class Player {
 	public Intel[] intel;
 	
 	/* Constructor */
-	public Player(Card idcard) {
+	public Player(Card idcard, int gameSize) {
 		this.hand = new Hand();
 		this.idcard = idcard;
 		this.identity = idcard.name;
@@ -28,13 +29,13 @@ public abstract class Player {
 		this.statuses = new int[2];
 		this.statuses[0] = 0;
 		this.statuses[1] = 0;
-		this.intel = new Intel[12];
-		for (i=0;i<12;i++){
+		this.intel = new Intel[gameSize];
+		for (i=0;i<gameSize;i++){
 			this.intel[i] = new Intel();
 		}
 	}
 
 	/* Subroutines */
-	abstract public void playTurn();
+	abstract public void playTurn(Game game);
 	abstract public int promptToby(int gameSize);
 }

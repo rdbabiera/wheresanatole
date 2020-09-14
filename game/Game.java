@@ -25,6 +25,7 @@ public class Game {
 	public ArrayList<Card> tCards;
 	
 	public Player[] turnOrder;
+	public boolean aWin, tWin;
 	
 	public Game(int sizeAnatole, int sizeToby) {
 		Random rand = new Random();
@@ -41,6 +42,8 @@ public class Game {
 		this.day = new Day();
 		this.nextDay = new Day();
 		this.turnOrder = new Player[gameSize];
+		this.aWin = false;
+		this.tWin = false;
 		
 		/* Initialize Turn Order and Players */
 		int i;	
@@ -58,26 +61,26 @@ public class Game {
 		Human player = null;
 		if (teamRand == 0) {
 			if (sizeAnatole == 1) {
-				player = new Human(aCards.remove(0));
+				player = new Human(aCards.remove(0), gameSize);
 				sizeAnatole--;
 			} else {
 				charRand = rand.nextInt(aCards.size());
-				player = new Human(aCards.remove(charRand));
+				player = new Human(aCards.remove(charRand), gameSize);
 				sizeAnatole--;
 			}
 		} else if (teamRand == 1) {
 			if (sizeToby == 1) {
-				player = new Human(tCards.remove(0));
+				player = new Human(tCards.remove(0), gameSize);
 				sizeToby--;
 			} else {
 				charRand = rand.nextInt(tCards.size());
-				player = new Human(tCards.remove(charRand));
+				player = new Human(tCards.remove(charRand), gameSize);
 				sizeToby--;
 			}
 		}
 		
 		if (!player.identity.equals("Tony")) {
-			this.turnOrder[0] = new TobyAI(tCards.remove(0));
+			this.turnOrder[0] = new TobyAI(tCards.remove(0), gameSize);
 			sizeToby--;
 			if (gameSize == 2) {
 				this.playerSpot = 1;
@@ -101,7 +104,7 @@ public class Game {
 					anatoleSpot = rand.nextInt((gameSize - 1)) + 1;
 				}
 			}		
-			anatole = new AI(aCards.remove(0));
+			anatole = new AI(aCards.remove(0), gameSize);
 			sizeAnatole--;
 		} else {
 			anatoleSpot = this.playerSpot;
@@ -116,19 +119,19 @@ public class Game {
 				teamRand = rand.nextInt(2);
 				if ((teamRand == 0) && (sizeAnatole > 0)) {
 					charRand = rand.nextInt(aCards.size());
-					this.turnOrder[i] = new AI(aCards.remove(charRand));
+					this.turnOrder[i] = new AI(aCards.remove(charRand), gameSize);
 					sizeAnatole--;
 				} else if ((teamRand == 0) && (sizeAnatole == 0)){
 					charRand = rand.nextInt(tCards.size());
-					this.turnOrder[i] = new AI(tCards.remove(charRand));
+					this.turnOrder[i] = new AI(tCards.remove(charRand), gameSize);
 					sizeToby--;
 				} else if ((teamRand == 1) && (sizeToby > 0)) {
 					charRand = rand.nextInt(tCards.size());
-					this.turnOrder[i] = new AI(tCards.remove(charRand));
+					this.turnOrder[i] = new AI(tCards.remove(charRand), gameSize);
 					sizeToby--;
 				} else if ((teamRand == 1) && (sizeToby == 0)) {
 					charRand = rand.nextInt(aCards.size());
-					this.turnOrder[i] = new AI(aCards.remove(charRand));
+					this.turnOrder[i] = new AI(aCards.remove(charRand), gameSize);
 					sizeAnatole--;
 				}				
 			}
@@ -152,14 +155,80 @@ public class Game {
 		
 	}
 	
+	
 	public void startDay() {
 		int currentTurn = 0;
+		int guess;
+		int victoryCheck;
 		while (currentTurn < gameSize) {
-			/* Method to prompt */
+			if (currentTurn == 0) {
+				guess = this.turnOrder[0].promptToby(gameSize);
+				if (guess != -1) {
+					victoryCheck = anatoleCheck(this.turnOrder, guess);
+					if (victoryCheck == 1) {
+						this.aWin = true;
+						return;
+					} else if (victoryCheck == 2) {
+						this.tWin = true;
+						return;
+					}
+				}
+			}
+			turnOrder[currentTurn].playTurn(this);
 			currentTurn++;
 		}
 	}
 	
+	public int anatoleCheck(Player[] turnOrder, int guess) {
+		if (!turnOrder[guess].identity.equals("Anatole")) {
+			addAlibi(this.mainDeck, this.anatoleCards);
+			return 0;
+		} else {
+			if (turnOrder[guess].hand.checkFor("History Paper") == 1) {
+				System.out.println("Toby: 'Where's my history paper, Anatole?'");
+				System.out.println("Anatole: 'Right here.'");
+				System.out.println("Team Anatole has claimed victory!");
+				return 1;
+			} else if (turnOrder[guess].hand.checkFor("Alibi") == 1) {
+				turnOrder[guess].hand.discardSpecific("Alibi");
+				System.out.println("Anatole has been found... But! He has "
+						+ "an alibi on hand. The history paper will now be "
+						+ "added to the top 3 cards of the deck. Pray that one of his"
+						+ " friends has it...");
+				addPaper(this.mainDeck, this.anatoleCards);
+				return 0;
+			}
+			System.out.println("Anatole has been caught red handed without"
+					+ " protection. Team Toby wins!");
+			return 2;
+		}
+	}
+	
+	public void addAlibi(Deck main, Deck anatole) {
+		if (anatole.deck.size() == 0) {
+			return;
+		} else if (anatole.deck.size() == 1) {
+			System.out.println("This is Toby's third incorrect guess! The "
+					+ "History Paper has been added to the top of the deck!");
+		} else {
+			System.out.println("An alibi has been added to the top of the "
+					+ "deck!");
+		}
+		main.deck.add(anatole.removeCard(0));
+	}
+	
+	public void addPaper(Deck main, Deck anatole) {
+		if (anatole.deck.size() < 1) {
+			return;
+		}
+		Random rand = new Random();
+		int index = rand.nextInt(3);
+		while ((index >= main.deck.size()) && (index > 0)) {
+			index--;
+		}
+		main.deck.add(index, anatole.removeCard((anatole.deck.size() - 1)));
+	}
+
 	public void updateDay() {
 		this.day = this.nextDay;
 		this.nextDay = new Day();

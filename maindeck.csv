@@ -10,12 +10,12 @@ Cough Card,Skip the next player's turn.,GENERAL,ALL,REVEAL,0,HARM
 Defuse Kit,All bombs are defused and discarded. Draw a card for every bomb defused.,TOBY,ALL,REVEAL,0,HELP
 Drop Me T4?,You may donate any amount of cards to a chosen player,GENERAL,ALL,REVEAL,0,HELP
 Early Dismissal,End the day early.,GENERAL,ALL,REVEAL,0,HARM
-Escape,Each player is allowed the option to skip school for the rest of the day.,ALAN,CUERVO,REVEAL,0,HELP
+Escape,Each player is allowed the option to skip school for the rest of the day.,ANATOLE,CUERVO,REVEAL,0,HELP
 Ghost Sauce,You cannot play cards when this card is given to you by Krishna.,TOBY,KRIS,TRADE,0,HARM
-IT'S ME,All players cannot play cards for two days.,ALAN,PARKER,REVEAL,0,HARM
+IT'S ME,All players cannot play cards for two days.,ANATOLE,PARKER,REVEAL,0,HARM
 Kenneth I'm Sorry,Your identity is revealed to the entire table when drawn.,GENERAL,ALL,DISCOVER,0,NONE
-La Montagne,All disciplinary commitee members are revealed to non disciplinary commitee members.,ALAN,JOHNSON,REVEAL,0,HELP
-Pink Slip,If called on by Toby then the player refuses to reveal themselves AND they are immune to being called on for 3 turns.,ALAN,GURBUR,TRADE,0,SAVE
+La Montagne,All disciplinary commitee members are revealed to non disciplinary commitee members.,ANATOLE,JOHNSON,REVEAL,0,HELP
+Pink Slip,If called on by Toby then the player refuses to reveal themselves AND they are immune to being called on for 3 turns.,ANATOLE,GURBUR,TRADE,0,SAVE
 Radar Jammer,Trading is banned for the day.,TOBY,TOBY,REVEAL,0,HARM
 Reported,All cards being traded must be revealed for a day. ,TOBY,ALL,REVEAL,0,HELP
 Snack Bomb,You are removed from the game if you do not trade this card by the end of the next day.,GENERAL,ALL,TRADE,0,BOMB
@@ -24,4 +24,4 @@ Stink Bomb,If called on by Toby then the player is removed from school for two d
 Suspension,Class-specific abilities are banned for two days.,TOBY,TOBY,REVEAL,0,HARM
 Walled Off,Force a player to discard a random card.,GENERAL,ALL,REVEAL,0,HARM
 Weekend at Bernie's,Swap hands with another player.,GENERAL,ALL,REVEAL,0,HELP
-Yapstone,If Anatole has 3 Yapstones then he may purchase a History Paper.,ALAN,ANATOLE,HELD,0,ANATOLE
+Yapstone,If Anatole has 3 Yapstones then he may purchase a History Paper.,ANATOLE,ANATOLE,HELD,0,ANATOLE

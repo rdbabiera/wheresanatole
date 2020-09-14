@@ -26,5 +26,24 @@ public class Hand {
 		System.out.println("End of Hand");
 	}
 	
+	public int checkFor(String str) {
+		int i;
+		for (i=0; i<this.hand.size(); i++) {
+			if (this.hand.get(i).name.equals(str)) {
+				return 1;
+			}
+		}
+		return 0;
+	}
+	
+	public void discardSpecific(String str) {
+		int i;
+		for (i=0; i<this.hand.size(); i++) {
+			if (this.hand.get(i).name.equals(str)) {
+				this.hand.remove(i);
+				return;
+			}
+		}
+	}
 	
 }
