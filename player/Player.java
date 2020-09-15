@@ -34,8 +34,31 @@ public abstract class Player {
 			this.intel[i] = new Intel();
 		}
 	}
+	
+	/* Action Subroutines */
+	public void drawCard(Deck deck) {
+		if (deck.returnSize() < 1) {
+			return;
+		}
+		this.hand.addCard(deck.removeCard(0));
+	}
+	
+	public void discardCard(Card card, Deck discardPile) {
+		discardPile.addCard(card);
+	}
 
 	/* Subroutines */
 	abstract public void playTurn(Game game);
 	abstract public int promptToby(int gameSize);
+	abstract public void promptDraw(Game game);
+	abstract public void promptReveal(Game game);
+	abstract public void promptTrade(Game game);
+	abstract public void promptBuy(Game game);
+	
+	public void updateHand() {
+		int i;
+		for (i=0; i<this.hand.size();i++) {
+			
+		}
+	}
 }

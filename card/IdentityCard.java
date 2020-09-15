@@ -8,4 +8,16 @@ public class IdentityCard extends Card{
 			PlayType type, CardAI cAI){
 		super(name, desc, team, character, type, cAI);
 	}
+
+	public void update() {
+	}
+
+	public void reveal() {
+	}
+
+	public void trade() {
+	}
+
+	public void drawUpdate() {		
+	}
 }

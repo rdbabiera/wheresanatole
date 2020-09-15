@@ -200,4 +200,8 @@ public class Deck {
 		Card card = this.deck.remove(index);
 		return card;
 	}
+	
+	public int returnSize() {
+		return this.deck.size();
+	}
 }

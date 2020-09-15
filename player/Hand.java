@@ -46,4 +46,12 @@ public class Hand {
 		}
 	}
 	
+	public void addCard(Card card) {
+		this.hand.add(card);
+	}
+	
+	public int size() {
+		return this.hand.size();
+	}
+	
 }

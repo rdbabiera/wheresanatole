@@ -19,4 +19,9 @@ public abstract class Card {
 		this.type = type;
 		this.cAI = cAI;
 	}
+	
+	public abstract void update();
+	public abstract void reveal();
+	public abstract void trade();
+	public abstract void drawUpdate();
 }
