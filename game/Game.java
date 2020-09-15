@@ -233,4 +233,11 @@ public class Game {
 		this.day = this.nextDay;
 		this.nextDay = new Day();
 	}
+	
+	public void updatePresence() {
+		int i;
+		for (i=0; i<this.gameSize; i++) {
+			
+		}
+	}
 }  

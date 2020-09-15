@@ -21,6 +21,10 @@ public class Human extends Player{
 	}
 
 	public void playTurn(Game game) {
+		if ((!this.isAlive) || (!this.isPresent)) {
+			return;
+		}
+		
 		Scanner scan = new Scanner(System.in);
 		promptDraw(game);
 		int action;
@@ -34,16 +38,31 @@ public class Human extends Player{
 		System.out.println("6. Buy Card");
 		action = scan.nextInt();
 		
-		while (action > 2) {
+		while ((action > 2) || (action < 1)) {
 			while ((action < 1) || (action > 6)) {
 				System.out.println("Invalid action... Try again.");
 				action = scan.nextInt();
 			}
-		}
-		if (action == 1) {
-			
+			switch (action) {
+			case 3:
+				this.hand.displayHand();
+				break;
+			case 4:
+				this.displayIntel();
+			case 5:
+				game.shop.displayContents();
+			case 6:
+				this.promptBuy(game);
+			}
+			System.out.println("What's Next?");
+			action = scan.nextInt();
 		}
 		
+		if (action == 1) {
+			this.promptReveal(game);
+		} else if (action == 2) {
+			this.promptTrade(game);
+		}
 		scan.close();
 	}
 

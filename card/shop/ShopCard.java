@@ -6,7 +6,7 @@ import card.CardTeam;
 import card.PlayType;
 import player.Characters;
 
-public class ShopCard extends Card {
+public abstract class ShopCard extends Card {
 	int cost;
 	
 	public ShopCard(String name, String desc, CardTeam team, Characters character, 
@@ -14,4 +14,9 @@ public class ShopCard extends Card {
 		super(name, desc, team, character, type, cAI);
 		this.cost = cost;
 	}
+
+	public abstract void update();
+	public abstract void reveal();
+	public abstract void trade();
+	public abstract void drawUpdate();
 }
