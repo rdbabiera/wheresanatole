@@ -7,7 +7,7 @@ import card.PlayType;
 import player.Characters;
 
 public abstract class ShopCard extends Card {
-	int cost;
+	public int cost;
 	
 	public ShopCard(String name, String desc, CardTeam team, Characters character, 
 			PlayType type, int cost, CardAI cAI){

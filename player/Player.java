@@ -1,5 +1,6 @@
 package player;
 import card.*;
+import card.shop.*;
 import game.*;
 
 public abstract class Player {
@@ -30,12 +31,19 @@ public abstract class Player {
 		this.isAlive = true;
 		this.clout = 0;
 		this.intel = new Intel[gameSize];
-		for (i=0;i<gameSize;i++){
+		for (i=0;i<gameSize;i++){ 
 			this.intel[i] = new Intel();
 		}
 	}
 	
 	/* Action Subroutines */
+	public void buyCard(Deck deck, int index) {
+		ShopCard card = (ShopCard) (deck.removeCard(index));
+		this.hand.addCard(card);
+		this.clout -= card.cost;
+		
+	}
+	
 	public void drawCard(Deck deck) {
 		if (deck.returnSize() < 1) {
 			return;
@@ -45,6 +53,11 @@ public abstract class Player {
 	
 	public void discardCard(Card card, Deck discardPile) {
 		discardPile.addCard(card);
+	}
+	
+	public void tradeCard(Card card, Player player) {
+		card.tradeUpdate(this, player);
+		player.hand.addCard(card);
 	}
 
 	/* Subroutines */

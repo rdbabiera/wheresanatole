@@ -1,6 +1,7 @@
 package card;
 
 import player.Characters;
+import player.*;
 
 public abstract class Card {
 	public String name;
@@ -9,6 +10,10 @@ public abstract class Card {
 	public Characters character;
 	public PlayType type;
 	public CardAI cAI;
+	public boolean canPlay;
+	public boolean canTrade;
+	public boolean removeTurnEnd;
+	
 	
 	public Card(String name, String desc, CardTeam team, Characters character, 
 			PlayType type, CardAI cAI){
@@ -20,8 +25,8 @@ public abstract class Card {
 		this.cAI = cAI;
 	}
 	
-	public abstract void update();
-	public abstract void reveal();
-	public abstract void trade();
+	public abstract void turnUpdate();
+	public abstract void revealUpdate();
+	public abstract void tradeUpdate(Player sender, Player recep);
 	public abstract void drawUpdate();
 }

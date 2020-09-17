@@ -1,6 +1,5 @@
 package game;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -80,7 +79,7 @@ public class Game {
 		}
 		
 		if (!player.identity.equals("Tony")) {
-			this.turnOrder[0] = new TobyAI(tCards.remove(0), gameSize);
+			this.turnOrder[0] = new TobyAI(tCards.remove(0), gameSize, 0);
 			sizeToby--;
 			if (gameSize == 2) {
 				this.playerSpot = 1;
@@ -104,7 +103,7 @@ public class Game {
 					anatoleSpot = rand.nextInt((gameSize - 1)) + 1;
 				}
 			}		
-			anatole = new AI(aCards.remove(0), gameSize);
+			anatole = new AI(aCards.remove(0), gameSize, anatoleSpot);
 			sizeAnatole--;
 		} else {
 			anatoleSpot = this.playerSpot;
@@ -119,19 +118,19 @@ public class Game {
 				teamRand = rand.nextInt(2);
 				if ((teamRand == 0) && (sizeAnatole > 0)) {
 					charRand = rand.nextInt(aCards.size());
-					this.turnOrder[i] = new AI(aCards.remove(charRand), gameSize);
+					this.turnOrder[i] = new AI(aCards.remove(charRand), gameSize, i);
 					sizeAnatole--;
 				} else if ((teamRand == 0) && (sizeAnatole == 0)){
 					charRand = rand.nextInt(tCards.size());
-					this.turnOrder[i] = new AI(tCards.remove(charRand), gameSize);
+					this.turnOrder[i] = new AI(tCards.remove(charRand), gameSize, i);
 					sizeToby--;
 				} else if ((teamRand == 1) && (sizeToby > 0)) {
 					charRand = rand.nextInt(tCards.size());
-					this.turnOrder[i] = new AI(tCards.remove(charRand), gameSize);
+					this.turnOrder[i] = new AI(tCards.remove(charRand), gameSize, i);
 					sizeToby--;
 				} else if ((teamRand == 1) && (sizeToby == 0)) {
 					charRand = rand.nextInt(aCards.size());
-					this.turnOrder[i] = new AI(aCards.remove(charRand), gameSize);
+					this.turnOrder[i] = new AI(aCards.remove(charRand), gameSize, i);
 					sizeAnatole--;
 				}				
 			}
@@ -143,9 +142,9 @@ public class Game {
 			this.publicIntel[i] = new Intel();
 		}
 		this.publicIntel[0].team = CardTeam.TOBY;
-		this.publicIntel[0].character = Characters.TONY;
+		this.publicIntel[0].character = Characters.TOBY;
 		for (i=0; i<gameSize; i++) {
-			this.turnOrder[i].intel[0].character = Characters.TONY;
+			this.turnOrder[i].intel[0].character = Characters.TOBY;
 			this.turnOrder[i].intel[0].team = CardTeam.TOBY;
 			if (i != 0) {
 				this.turnOrder[i].intel[i].character = this.turnOrder[i].idcard.character;

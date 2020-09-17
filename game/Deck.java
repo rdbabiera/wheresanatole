@@ -182,6 +182,14 @@ public class Deck {
 		this.deck.add(card);
 		this.shuffle();
 	}
+	
+	public Card get(int index) {
+		if ((index >= 0) && (index < this.returnSize())) {
+			return this.deck.get(index);
+		}
+		return null;
+	}
+	
 	public void displayContents() {
 		int i;
 		System.out.println("Printing Deck Contents...");

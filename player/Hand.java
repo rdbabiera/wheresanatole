@@ -12,6 +12,27 @@ public class Hand {
 		this.hand = new ArrayList<Card>();
 	}
 	
+	public boolean canPlay() {
+		int i;
+		for (i=0; i<this.size(); i++) {
+			if (this.get(i).canPlay) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean canTrade() {
+		int i;
+		for (i=0; i<this.size(); i++) {
+			if (this.get(i).canTrade) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 	public void displayHand() {
 		int i;
 		System.out.println("Displaying Hand...");
@@ -34,6 +55,13 @@ public class Hand {
 			}
 		}
 		return 0;
+	}
+	
+	public Card get(int index) {
+		if ((index >= 0) && (index < this.size())) {
+			return this.hand.get(index);
+		}
+		return null;
 	}
 	
 	public void discardSpecific(String str) {

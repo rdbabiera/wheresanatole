@@ -1,6 +1,7 @@
 package card;
 
 import player.Characters;
+import player.Player;
 
 public class IdentityCard extends Card{
 	
@@ -9,15 +10,18 @@ public class IdentityCard extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	public void update() {
-	}
-
-	public void reveal() {
-	}
-
-	public void trade() {
-	}
-
 	public void drawUpdate() {		
+	}
+
+	public void turnUpdate() {
+		
+	}
+
+	public void revealUpdate() {
+		
+	}
+
+	public void tradeUpdate(Player sender, Player recep) {
+		
 	}
 }
