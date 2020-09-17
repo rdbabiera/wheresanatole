@@ -77,8 +77,9 @@ public class Game {
 				sizeToby--;
 			}
 		}
+		System.out.println("Player is: " + player.identity);
 		
-		if (!player.identity.equals("Tony")) {
+		if (!player.identity.equals("Toby")) {
 			this.turnOrder[0] = new TobyAI(tCards.remove(0), gameSize, 0);
 			sizeToby--;
 			if (gameSize == 2) {
@@ -94,7 +95,7 @@ public class Game {
 		int anatoleSpot;
 		Player anatole = null;
 		
-		if (!player.identity.equals("anatole")) {
+		if (!player.identity.equals("Anatole")) {
 			if (gameSize == 2) {
 				anatoleSpot = 1;
 			} else {

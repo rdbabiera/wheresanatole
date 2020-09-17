@@ -26,8 +26,8 @@ public class Human extends Player{
 			return;
 		}
 		
-		Scanner scan = new Scanner(System.in);
 		promptDraw(game);
+		Scanner scan = new Scanner(System.in);
 		int action;
 		System.out.println("Please choose an action for your turn. "
 				+ "Alternatively, you can display any information you have.");
@@ -88,14 +88,19 @@ public class Human extends Player{
 
 	public int promptToby(int gameSize) {
 		Scanner scan = new Scanner(System.in);
+		char input = ' ';
 		System.out.println("Would you like to guess who Anatole is? (y or n)");
-		String input = scan.nextLine();
-		while ((!input.equals("y")) || (!input.equals("n"))) {
+		boolean validInput = false;
+		while (!validInput) {
+			input = scan.next().charAt(0);
+			if (input == 'y' || input == 'n') {
+				validInput = true;
+				break;
+			}
 			System.out.println("Not a valid input... Try again.");
-			input = scan.nextLine();
 		}
 		
-		if (input.equals("y")) {
+		if (input == 'y') {
 			System.out.println("Okay. Where's Anatole then? " +
 		"(Enter the index where you believe Anatole is)");
 			int guess = scan.nextInt();
@@ -112,23 +117,23 @@ public class Human extends Player{
 	}
 
 	public void promptDraw(Game game) {
-		Scanner scan = new Scanner(System.in);
-		String input = "m";
+		Scanner scanD = new Scanner(System.in);
+		char input = 'm';
 		if (game.drawnSpecials.returnSize() > 0) {
 			System.out.println("Would you like to draw from the Main deck "
 					+ "or the Special Deck? (m or s)");
-			input = scan.nextLine();
-			while ((!input.equals("m")) || (!input.equals("s"))) {
+			input = scanD.next().charAt(0);
+			while (input != 'm' || input != 's') {
 				System.out.println("Not a valid input... Try again.");
-				input = scan.nextLine();
+				input = scanD.next().charAt(0);
 			}
 		}
-		if (input.equals("s")) {
+		if (input == 's') {
 			this.drawCard(game.drawnSpecials);
-		} else if (input.equals("m")) {
+		} else if (input == 'm') {
 			this.drawCard(game.mainDeck);
 		}
-		scan.close();
+		scanD.close();
 	}
 
 	public void promptReveal(Game game) {

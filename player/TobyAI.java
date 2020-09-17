@@ -17,7 +17,7 @@ public class TobyAI extends Player{
 
 
 	public int promptToby(int gameSize) {
-		return 0;
+		return 1;
 	}
 
 	@Override
