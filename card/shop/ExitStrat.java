@@ -11,7 +11,6 @@ public class ExitStrat extends ShopCard {
 	public ExitStrat(String name, String desc, CardTeam team, Characters character, 
 			PlayType type, int cost, CardAI cAI){
 		super(name, desc, team, character, type, cost, cAI);
-		
 	}
 
 	public void turnUpdate(Player player, Game game) {
@@ -32,6 +31,9 @@ public class ExitStrat extends ShopCard {
 				game.turnOrder[i].intel[player.position].team = player.team;
 			}
 		}
+		for (i=0; i<player.hand.size(); i++) {
+			player.hand.get(i).canPlay = playCheck(player);
+		}
 	}
 
 	public void tradeUpdate(Player sender, Player recep) {
@@ -45,7 +47,11 @@ public class ExitStrat extends ShopCard {
 	}
 	
 	public void drawUpdate(Player player, Game game) {
-		this.canPlay = true;
+		if (player.identity.equals("Toby")) {
+			this.canPlay = false;
+		} else {
+			this.canPlay = true;
+		}
 		this.canTrade = true;
 		this.removeTurnEnd = false;
 	}

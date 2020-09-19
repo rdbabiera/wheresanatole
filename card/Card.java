@@ -30,4 +30,15 @@ public abstract class Card {
 	public abstract void revealUpdate(Player player, Game game);
 	public abstract void tradeUpdate(Player sender, Player recep);
 	public abstract void drawUpdate(Player player, Game game);
+	
+	public boolean playCheck(Player player) {
+		if (this.team == player.team || this.team == CardTeam.GENERAL) {
+			return true;
+		} else if (this.character == player.idcard.character) {
+			return true;
+		} else {
+			return false;
+		}
+	}	
+	
 }

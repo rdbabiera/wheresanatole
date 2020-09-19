@@ -18,7 +18,7 @@ public class LeftSteamOpen extends ShopCard {
 	}
 
 	public void revealUpdate(Player player, Game game) {
-		
+		int i;
 	}
 
 	public void tradeUpdate(Player sender, Player recep) {
@@ -26,7 +26,7 @@ public class LeftSteamOpen extends ShopCard {
 	}
 
 	public void drawUpdate(Player player, Game game) {
-		
+		this.canPlay = this.playCheck(player);
 	}
 
 }
