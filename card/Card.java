@@ -1,6 +1,7 @@
 package card;
 
 import player.Characters;
+import game.*;
 import player.*;
 
 public abstract class Card {
@@ -25,8 +26,8 @@ public abstract class Card {
 		this.cAI = cAI;
 	}
 	
-	public abstract void turnUpdate();
-	public abstract void revealUpdate();
+	public abstract void turnUpdate(Player player, Game game);
+	public abstract void revealUpdate(Player player, Game game);
 	public abstract void tradeUpdate(Player sender, Player recep);
-	public abstract void drawUpdate();
+	public abstract void drawUpdate(Player player, Game game);
 }

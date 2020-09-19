@@ -8,9 +8,12 @@ import java.util.Scanner;
 
 public class Human extends Player{
 	boolean isPlayer;
+	Scanner scan;
+	
 	public Human(Card idcard, int gameSize) {
 		super(idcard, gameSize);
 		this.isPlayer = true;
+		this.scan = new Scanner(System.in);
 	}
 	
 	public void displayIntel() {
@@ -25,9 +28,7 @@ public class Human extends Player{
 		if ((!this.isAlive) || (!this.isPresent)) {
 			return;
 		}
-		
-		promptDraw(game);
-		Scanner scan = new Scanner(System.in);
+
 		int action;
 		System.out.println("Please choose an action for your turn. "
 				+ "Alternatively, you can display any information you have.");
@@ -39,14 +40,14 @@ public class Human extends Player{
 		System.out.println("6. Display Shop");
 		System.out.println("7. Buy Card");
 		
-		action = scan.nextInt();
+		action = this.scan.nextInt();
 		
 		boolean endTurn = false;
 		
 		while (!endTurn) {
 			while ((action < 1) || (action > 7)) {
 				System.out.println("Invalid action... Try again.");
-				action = scan.nextInt();
+				action = this.scan.nextInt();
 			}
 			switch (action) {
 			case 1:
@@ -57,6 +58,7 @@ public class Human extends Player{
 				}
 				else {
 					System.out.println("This action cannot be performed...");
+					break;
 				}
 			case 2:
 				if (this.hand.canTrade()){
@@ -66,33 +68,37 @@ public class Human extends Player{
 				}
 				else {
 					System.out.println("This action cannot be performed...");
+					break;
 				}
 			case 3:
 				endTurn = true;
 				break;
 			case 4:
 				this.hand.displayHand();
+				break;
 			case 5:
 				this.displayIntel();
+				break;
 			case 6:
 				game.shop.displayContents();
+				break;
 			case 7:
 				this.promptBuy(game);
-			default:
+				break;
+			}
+			if (!endTurn) {
 				System.out.println("What's Next?");
-				action = scan.nextInt();
+				action = this.scan.nextInt();
 			}
 		}
-		scan.close();
 	}
 
 	public int promptToby(int gameSize) {
-		Scanner scan = new Scanner(System.in);
 		char input = ' ';
 		System.out.println("Would you like to guess who Anatole is? (y or n)");
 		boolean validInput = false;
 		while (!validInput) {
-			input = scan.next().charAt(0);
+			input = this.scan.next().charAt(0);
 			if (input == 'y' || input == 'n') {
 				validInput = true;
 				break;
@@ -103,94 +109,86 @@ public class Human extends Player{
 		if (input == 'y') {
 			System.out.println("Okay. Where's Anatole then? " +
 		"(Enter the index where you believe Anatole is)");
-			int guess = scan.nextInt();
+			int guess = this.scan.nextInt();
 			while ((guess >= gameSize) || (guess < 1)) {
 				System.out.println("I don't believe that's a valid guess at "
 						+ "the table... Try again.");
-				guess = scan.nextInt();
+				guess = this.scan.nextInt();
 			}
-			scan.close();
 			return guess;
 		}
-		scan.close();
 		return -1;
 	}
 
 	public void promptDraw(Game game) {
-		Scanner scanD = new Scanner(System.in);
 		char input = 'm';
 		if (game.drawnSpecials.returnSize() > 0) {
 			System.out.println("Would you like to draw from the Main deck "
 					+ "or the Special Deck? (m or s)");
-			input = scanD.next().charAt(0);
+			input = this.scan.next().charAt(0);
 			while (input != 'm' || input != 's') {
 				System.out.println("Not a valid input... Try again.");
-				input = scanD.next().charAt(0);
+				input = this.scan.next().charAt(0);
 			}
 		}
 		if (input == 's') {
-			this.drawCard(game.drawnSpecials);
+			this.drawCard(game.drawnSpecials, game);
 		} else if (input == 'm') {
-			this.drawCard(game.mainDeck);
+			this.drawCard(game.mainDeck, game);
 		}
-		scanD.close();
 	}
 
 	public void promptReveal(Game game) {
-		Scanner scan = new Scanner(System.in);
 		int selection;
 		System.out.println("Which card would you like to reveal?");
-		selection = scan.nextInt();
+		selection = this.scan.nextInt();
 		boolean validMove = false;
 		while (!validMove) {
 			while ((selection < 0) || (selection >= this.hand.size())) {
 				System.out.println("This index doesn't exist... Try again.");
-				selection = scan.nextInt();
+				selection = this.scan.nextInt();
 			}
 			if (this.hand.get(selection).canPlay) {
-				this.hand.get(selection).revealUpdate();
+				this.hand.get(selection).revealUpdate(this, game);
 				this.discardCard(this.hand.hand.remove(selection), game.discardPile);
 				validMove = true;
 			} else {
 				System.out.println("This card cannot be played... Try again.");
-				selection = scan.nextInt();
+				selection = this.scan.nextInt();
 			}
 		}
-		scan.close();
 	}
 	
 	public void promptTrade(Game game) {
-		Scanner scan = new Scanner(System.in);
 		Card card;
 		int selection;
 		int pSelect;
 		Player target = null;
 		System.out.println("Which card would you like to trade?");
-		selection = scan.nextInt();
+		selection = this.scan.nextInt();
 		boolean validMove = false;
 		while (!validMove) {
 			while ((selection < 0) || (selection >= this.hand.size())) {
 				System.out.println("This index doesn't exist... Try again.");
-				selection = scan.nextInt();
+				selection = this.scan.nextInt();
 			}
 			if (this.hand.get(selection).canTrade) {
 				card = this.hand.hand.remove(selection);
 				System.out.println("Who would you like to give this to?");
 				this.displayIntel();
-				pSelect = scan.nextInt();
+				pSelect = this.scan.nextInt();
 				while ((pSelect < 0) || (pSelect >= game.gameSize) || (pSelect == this.position)) {
 					System.out.println("Not a valid target... Try again.");
-					pSelect = scan.nextInt();
+					pSelect = this.scan.nextInt();
 				}
 				target = game.turnOrder[pSelect];
 				this.tradeCard(card, target);
 				validMove = true;
 			} else {
 				System.out.println("This card cannot be traded... Try again.");
-				selection = scan.nextInt();
+				selection = this.scan.nextInt();
 			}
 		}
-		scan.close();
 	}
 
 	public void promptBuy(Game game) {
@@ -199,18 +197,17 @@ public class Human extends Player{
 			System.out.println("There are no cards in the shop left...");
 			return;
 		}
-		Scanner scan = new Scanner(System.in);
 		boolean endTurn = false;
 		System.out.println("Here are the current shop cards:");
 		game.shop.displayContents();
 		System.out.printf("You have %d clout\n", this.clout);
 		System.out.println("What would you like to buy? Type the size of "
 				+ "the shop to exit");
-		int choice = scan.nextInt();
+		int choice = this.scan.nextInt();
 		while (!endTurn) {
 			while ((choice < 0) && (choice > shopSize)) {
 				System.out.println("Invalid action... Try again.");
-				choice = scan.nextInt();
+				choice = this.scan.nextInt();
 			}
 			if (choice == shopSize) {
 				endTurn = true;
@@ -218,14 +215,13 @@ public class Human extends Player{
 				if (((ShopCard) game.shop.get(choice)).cost > this.clout) {
 					System.out.println("You do not have enough clout to "
 							+ "buy this. Pick again.");
-					choice = scan.nextInt();
+					choice = this.scan.nextInt();
 				} else {
-					this.buyCard(game.shop, choice);
+					this.buyCard(game.shop, choice, game);
 					endTurn = true;
 				}
 			}
 		}
-		scan.close();
 	}
 	
 }

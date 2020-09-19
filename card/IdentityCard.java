@@ -1,5 +1,6 @@
 package card;
 
+import game.Game;
 import player.Characters;
 import player.Player;
 
@@ -10,14 +11,14 @@ public class IdentityCard extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	public void drawUpdate() {		
+	public void drawUpdate(Player player, Game game) {		
 	}
 
-	public void turnUpdate() {
+	public void turnUpdate(Player player, Game game) {
 		
 	}
 
-	public void revealUpdate() {
+	public void revealUpdate(Player player, Game game) {
 		
 	}
 

@@ -37,18 +37,22 @@ public abstract class Player {
 	}
 	
 	/* Action Subroutines */
-	public void buyCard(Deck deck, int index) {
+	public void buyCard(Deck deck, int index, Game game) {
 		ShopCard card = (ShopCard) (deck.removeCard(index));
+		card.drawUpdate(this, game);
 		this.hand.addCard(card);
 		this.clout -= card.cost;
 		
 	}
 	
-	public void drawCard(Deck deck) {
+	public void drawCard(Deck deck, Game game) {
+		Card card;
 		if (deck.returnSize() < 1) {
 			return;
 		}
-		this.hand.addCard(deck.removeCard(0));
+		card = deck.removeCard(0);
+		card.drawUpdate(this, game);
+		this.hand.addCard(card);
 	}
 	
 	public void discardCard(Card card, Deck discardPile) {

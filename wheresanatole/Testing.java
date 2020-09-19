@@ -12,10 +12,13 @@ public class Testing {
 		
 		int i;
 		
-		Game game = new Game(1, 1);
+		Game game = new Game(3, 3);
 		for (i=0;i<game.gameSize;i++) {
 			System.out.println(game.turnOrder[i].identity);
 		}
+		game.turnOrder[game.playerSpot].clout = 100;
+		game.startDay();
 		game.startDay();
 	}
 }
+ 

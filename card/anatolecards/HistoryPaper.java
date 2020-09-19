@@ -4,8 +4,8 @@ import card.Card;
 import card.CardAI;
 import card.CardTeam;
 import card.PlayType;
-import player.Characters;
-import player.Player;
+import game.*;
+import player.*;
 
 public class HistoryPaper extends Card{
 	public HistoryPaper(String name, String desc, CardTeam team, Characters character, 
@@ -13,11 +13,11 @@ public class HistoryPaper extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	public void turnUpdate() {
+	public void turnUpdate(Player player, Game game) {
 		
 	}
 
-	public void revealUpdate() {
+	public void revealUpdate(Player player, Game game) {
 		
 	}
 
@@ -25,7 +25,7 @@ public class HistoryPaper extends Card{
 		
 	}
 
-	public void drawUpdate() {
+	public void drawUpdate(Player player, Game game) {
 		
 	}
 }

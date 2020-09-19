@@ -44,6 +44,8 @@ public class Game {
 		this.aWin = false;
 		this.tWin = false;
 		
+		this.mainDeck.shuffle();
+		
 		/* Initialize Turn Order and Players */
 		int i;	
 		this.aCards = new ArrayList<Card>();
@@ -110,6 +112,8 @@ public class Game {
 			anatoleSpot = this.playerSpot;
 		}
 		
+		player.position = this.playerSpot;
+		
 		for (i=1; i<gameSize; i++) {
 			if ((i == this.playerSpot)){
 				this.turnOrder[i] = player;
@@ -155,12 +159,12 @@ public class Game {
 		
 	}
 	
-	
 	public void startDay() {
 		int currentTurn = 0;
 		int guess;
 		int victoryCheck;
 		while (currentTurn < gameSize) {
+			turnOrder[currentTurn].promptDraw(this);
 			if (currentTurn == 0) {
 				guess = this.turnOrder[0].promptToby(gameSize);
 				if (guess != -1) {
