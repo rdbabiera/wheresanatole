@@ -9,32 +9,33 @@ import player.Characters;
 import player.Player;
 
 public class Snackbomb extends Card{
+	public int timer;
+	
 	public Snackbomb(String name, String desc, CardTeam team, Characters character, 
 			PlayType type, CardAI cAI) {
 		super(name, desc, team, character, type, cAI);
+		this.timer = 0;
 	}
+	
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		this.timer += 1;
+		if (this.timer > 1) {
+			player.isAlive = false;
+			System.out.println("A player has held on to a snackbomb for too "
+					+ "long and has passed out from a food coma.");
+		}
 	}
 
-	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
-		
+		this.timer = 0;
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = false;
+		this.canTrade = true;
 	}
 }

@@ -1,11 +1,14 @@
 package card.maindeck;
 
+import java.util.Random;
+
 import card.Card;
 import card.CardAI;
 import card.CardTeam;
 import card.PlayType;
 import game.Game;
 import player.Characters;
+import player.Human;
 import player.Player;
 
 public class BashTax extends Card{
@@ -14,27 +17,42 @@ public class BashTax extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
+		int selection;
+		if (player.isHuman) {
+			System.out.println("Who would you like to steal from?");
+			Human human = (Human) player;
+			selection = human.scan.nextInt();
+			while ((selection < 0) || (selection >= game.gameSize) || 
+					(selection == player.position)) {
+				System.out.println("Not a valid input... Try again");
+				selection = human.scan.nextInt();
+			}
+		} else {
+			/* Need to do AI */
+			selection = game.gameSize - 1;
+		}
 		
+		if (game.turnOrder[selection].hand.size() < 1) {
+			return;
+		}
+		Random rand = new Random();
+		int pos = rand.nextInt(game.turnOrder[selection].hand.size());
+		Card card = game.turnOrder[selection].hand.remove(pos);
+		player.hand.addCard(card);
+		card.drawUpdate(player, game);
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = true;
+		this.canTrade = true;
 	}
 }

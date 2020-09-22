@@ -5,7 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import card.*;
+import card.maindeck.*;
 import game.*;
+import player.*;
 
 public class Testing {
 	public static void main(String[] args) {

@@ -5,8 +5,7 @@ import card.CardAI;
 import card.CardTeam;
 import card.PlayType;
 import game.Game;
-import player.Characters;
-import player.Player;
+import player.*;
 
 public class Backstab extends Card{
 	public Backstab(String name, String desc, CardTeam team, Characters character, 
@@ -14,27 +13,44 @@ public class Backstab extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		if (this.character != player.idcard.character) {
+			player.hand.hand.remove(this);
+			player.discardCard(this, game.drawnSpecials);
+		}
 	}
 
-	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
+		int selection;
+		if (player.isHuman) {
+			System.out.println("Who would you like to reveal?");
+			Human human = (Human) player;
+			selection = human.scan.nextInt();
+			while ((selection < 0) || (selection >= game.gameSize)) {
+				System.out.println("Not a valid input... Try again");
+				selection = human.scan.nextInt();
+			}
+		} else {
+			/* Need to do AI */
+			selection = game.gameSize - 1;
+		}
 		
+		game.publicIntel[player.position].character = player.idcard.character;
+		game.publicIntel[player.position].team = player.team;
+		game.publicIntel[selection].character = game.turnOrder[selection].idcard.character;
+		game.publicIntel[selection].team = game.turnOrder[selection].team;
+		System.out.println(player.identity +" has revealed a player! " + 
+			game.turnOrder[selection].identity + " has been located!");
+		game.updatePublicInfo();
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
+		this.canPlay = this.playCheck(recep);
 		
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = this.playCheck(player);
+		this.canTrade = true;
 	}
 }

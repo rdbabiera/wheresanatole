@@ -14,27 +14,25 @@ public class EarlyDismissal extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		int i;
+		for (i=player.position+1; i<game.gameSize; i++) {
+			game.turnOrder[i].skipTurn = true;
+		}
+		System.out.println("Mr. Katt's needs to be at his son's halloween parade. Class is dismissed!");
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
+		this.canPlay = true;
+		this.canTrade = true;
 		
 	}
 }

@@ -6,6 +6,7 @@ import card.CardTeam;
 import card.PlayType;
 import game.Game;
 import player.Characters;
+import player.Human;
 import player.Player;
 
 public class BanHammer extends Card{
@@ -14,27 +15,50 @@ public class BanHammer extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		if (this.character != player.idcard.character) {
+			player.hand.hand.remove(this);
+			player.discardCard(this, game.drawnSpecials);
+		}	
 	}
 
-	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
+		int selection;
+		if (player.isHuman) {
+			System.out.println("Who would you like to ban?");
+			Human human = (Human) player;
+			selection = human.scan.nextInt();
+			while ((selection < 1) || (selection >= game.gameSize) || 
+					(selection == player.position)) {
+				System.out.println("Not a valid input... Try again");
+				selection = human.scan.nextInt();
+			}
+		} else {
+			/* Need to do AI */
+			selection = game.gameSize - 1;
+		}
+		
+		game.turnOrder[selection].isAlive = false;
+		if (game.turnOrder[selection].identity.equals("Anatole")) {
+			game.tWin = true;
+			System.out.println("Anatole has been banned from the game! Team Toby will win "
+					+ "at the end of the day!");
+		} else {
+			System.out.println("A player has been banned from the game!");
+		}
+		game.publicIntel[player.position].character = player.idcard.character;
+		game.publicIntel[player.position].team = player.team;
+		game.updatePublicInfo();
 		
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
+		this.canPlay = this.playCheck(recep);
 		
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = this.playCheck(player);
+		this.canTrade = true;
 	}
 }

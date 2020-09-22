@@ -14,27 +14,26 @@ public class Suspension extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		if (this.character != player.idcard.character) {
+			player.hand.hand.remove(this);
+			player.discardCard(this, game.drawnSpecials);
+		}
 	}
 
 	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
+		game.day.classBan = true;
+		game.day.cbDur += 2;
 		
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = this.playCheck(recep);
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = this.playCheck(player);
+		this.canTrade = true;
 	}
 }

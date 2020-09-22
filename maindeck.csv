@@ -4,7 +4,7 @@ Ban Hammer,You kick a player out of the game. You bypass Anatole's alibi and win
 Bash Tax,Steal a card from a player.,GENERAL,ALL,REVEAL,0,HARM
 Blank,Does nothing.,GENERAL,ALL,TRADE,0,NONE
 Breach and Clear,Nobody will be able to draw cards for the next two turns except for Miller and revealed disciplinary members.,TOBY,NATTY,REVEAL,0,HARM
-Cancel Culture,Remove a player from school for a day.,GENERAL,ALL,REVEAL,0,HARM
+Cancel Culture,Remove a player from school for the rest of the day and tomorrow.,GENERAL,ALL,REVEAL,0,HARM
 Clout,Currency for Pay-to-Win Cards.,GENERAL,ALL,REVEAL,0,BUY
 Cough Card,Skip the next player's turn.,GENERAL,ALL,REVEAL,0,HARM
 Defuse Kit,All bombs are defused and discarded. Draw a card for every bomb defused.,TOBY,ALL,REVEAL,0,HELP

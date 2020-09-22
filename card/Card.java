@@ -32,7 +32,8 @@ public abstract class Card {
 	public abstract void drawUpdate(Player player, Game game);
 	
 	public boolean playCheck(Player player) {
-		if (this.team == player.team || this.team == CardTeam.GENERAL) {
+		if ((this.team == player.team || this.team == CardTeam.GENERAL) && 
+				(this.character == Characters.ALL)) {
 			return true;
 		} else if (this.character == player.idcard.character) {
 			return true;
@@ -40,5 +41,18 @@ public abstract class Card {
 			return false;
 		}
 	}	
+	
+	public boolean tradeCheck(Player player) {		
+		if (this.type == PlayType.TRADE) {
+			if (this.team != CardTeam.GENERAL) {
+				if (this.character != Characters.ALL) {
+					if (this.character != player.idcard.character) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
 	
 }

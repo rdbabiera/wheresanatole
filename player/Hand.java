@@ -6,7 +6,7 @@ import card.*;
 
 public class Hand {
 	public static int maxSize = 7;
-	ArrayList<Card> hand;
+	public ArrayList<Card> hand;
 	
 	public Hand() {
 		this.hand = new ArrayList<Card>();
@@ -60,6 +60,13 @@ public class Hand {
 	public Card get(int index) {
 		if ((index >= 0) && (index < this.size())) {
 			return this.hand.get(index);
+		}
+		return null;
+	}
+	
+	public Card remove(int index) {
+		if ((index >= 0) && (index < this.size())) {
+			return this.hand.remove(index);
 		}
 		return null;
 	}

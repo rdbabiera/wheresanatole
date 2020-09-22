@@ -14,7 +14,6 @@ public class DefusalKit extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
 		// TODO Auto-generated method stub
 		

@@ -244,4 +244,19 @@ public class Game {
 			
 		}
 	}
+	
+	public void updatePublicInfo() {
+		int i, j;
+		for (i=0; i<this.gameSize; i++) {
+			for (j=0; j<this.gameSize; j++) {
+				if (this.turnOrder[i].intel[j].character == Characters.UNKNOWN) {
+					this.turnOrder[i].intel[j].character = this.publicIntel[j].character;
+				}
+				if (this.turnOrder[i].intel[j].team == CardTeam.UNKNOWN) {
+					this.turnOrder[i].intel[j].team = this.publicIntel[j].team;
+				}
+			}
+		}
+	}
+	
 }  

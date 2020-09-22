@@ -14,27 +14,25 @@ public class KennethCard extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		game.publicIntel[player.position].character = player.idcard.character;
+		game.publicIntel[player.position].team = player.team;
+		game.updatePublicInfo();
+		player.hand.hand.remove(this);
+		player.discardCard(this, game.discardPile);
+		System.out.println("'Kenneth, I'm sorry.' -" + player.identity);
+		System.out.println(player.identity + " is in the " + player.position + " spot.");
 	}
 }

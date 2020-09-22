@@ -14,27 +14,25 @@ public class GhostSauce extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		if (this.character != player.idcard.character) {
+			player.hand.hand.remove(this);
+			player.discardCard(this, game.drawnSpecials);
+		}
 	}
 
-	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
-		
+		recep.canPlay = false;
+		this.canTrade = false;
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
+		this.canPlay = false;
+		this.canTrade = this.tradeCheck(player);
 		
 	}
 }

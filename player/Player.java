@@ -14,9 +14,13 @@ public abstract class Player {
 	public Intel[] intel;
 	
 	public boolean isPresent;
+	public boolean isHuman;
 	public int daysMissing;
 	public boolean isAlive;
 	public int clout;
+	public boolean skipTurn;
+	public boolean canTrade;
+	public boolean canPlay;
 	
 	/* Constructor */
 	public Player(Card idcard, int gameSize) {
@@ -34,6 +38,9 @@ public abstract class Player {
 		for (i=0;i<gameSize;i++){ 
 			this.intel[i] = new Intel();
 		}
+		this.skipTurn = false;
+		this.canPlay = true;
+		this.canTrade = true;
 	}
 	
 	/* Action Subroutines */

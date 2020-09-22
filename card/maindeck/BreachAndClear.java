@@ -14,27 +14,29 @@ public class BreachAndClear extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		if (this.character != player.idcard.character) {
+			player.hand.hand.remove(this);
+			player.discardCard(this, game.drawnSpecials);
+		}
 	}
 
-	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(player.identity + " has cleared out the room! "
+				+ "Only revealed disciplinary commitee members may draw"
+				+ "cards!");
+		game.day.bCdays += 2;
+		game.day.breachClear = true;
+		game.publicIntel[player.position].character = player.idcard.character;
+		game.publicIntel[player.position].team = player.team;
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = this.playCheck(recep);
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = this.playCheck(player);
+		this.canTrade = true;
 	}
 }

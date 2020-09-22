@@ -7,12 +7,11 @@ import game.*;
 import java.util.Scanner;
 
 public class Human extends Player{
-	boolean isPlayer;
-	Scanner scan;
+	public Scanner scan;
 	
 	public Human(Card idcard, int gameSize) {
 		super(idcard, gameSize);
-		this.isPlayer = true;
+		this.isHuman = true;
 		this.scan = new Scanner(System.in);
 	}
 	

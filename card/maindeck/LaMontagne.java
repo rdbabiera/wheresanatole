@@ -6,6 +6,7 @@ import card.CardTeam;
 import card.PlayType;
 import game.Game;
 import player.Characters;
+import player.Intel;
 import player.Player;
 
 public class LaMontagne extends Card{
@@ -14,27 +15,41 @@ public class LaMontagne extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		if (this.character != player.idcard.character) {
+			player.hand.hand.remove(this);
+			player.discardCard(this, game.drawnSpecials);
+		}
 	}
 
-	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		Intel[] reveal = new Intel[game.gameSize];
+		int i, j;
+		for (i=0; i<game.gameSize; i++) {
+			reveal[i] = new Intel();
+			if (game.turnOrder[i].team == CardTeam.TOBY) {
+				reveal[i].character = game.turnOrder[i].idcard.character;
+				reveal[i].team = game.turnOrder[i].team;
+			}
+		}
+		for (i=0; i<game.gameSize; i++) {
+			if (game.turnOrder[i].team == CardTeam.ANATOLE) {
+				for (j=0; j<game.gameSize; j++) {
+					if (reveal[j].team == CardTeam.TOBY) {
+						game.turnOrder[i].intel[j].character = reveal[j].character;
+						game.turnOrder[i].intel[j].team = reveal[j].team;
+					}
+				}
+			}
+		}
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = this.playCheck(recep);
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = this.playCheck(player);
+		this.canTrade = true;
 	}
 }
