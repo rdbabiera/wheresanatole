@@ -18,7 +18,9 @@ public class WorldFair extends ShopCard {
 	}
 
 	public void revealUpdate(Player player, Game game) {
-		
+		game.turnOrder[0].searchDelay += 2;
+		System.out.println("Toby has been impressed by the World Fair, "
+				+ "and his mind has been taken off Anatole.");
 	}
 
 	public void tradeUpdate(Player sender, Player recep) {
@@ -26,6 +28,7 @@ public class WorldFair extends ShopCard {
 	}
 
 	public void drawUpdate(Player player, Game game) {
-		
+		this.canTrade = true;
+		this.canPlay = true;
 	}
 }

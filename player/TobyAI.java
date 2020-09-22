@@ -8,7 +8,7 @@ public class TobyAI extends Player{
 	public TobyAI(Card idcard, int gameSize, int position) {
 		super(idcard, gameSize);
 		this.position = position;
-		// TODO Auto-generated constructor stub
+		this.searchDelay = 0;
 	}
 
 	public void playTurn(Game game) {

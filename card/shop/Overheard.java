@@ -19,7 +19,20 @@ public class Overheard extends ShopCard {
 	}
 
 	public void revealUpdate(Player player, Game game) {
-		
+		int i, j;
+		for (i=0; i<game.gameSize; i++) {
+			for (j=0; j<game.gameSize; j++) {
+				if ((j != i) && (game.turnOrder[i].intel[j].character != 
+						Characters.UNKNOWN)) {
+					game.publicIntel[j].character = 
+							game.turnOrder[i].intel[j].character;
+					game.publicIntel[j].team = game.turnOrder[i].intel[j].team;
+				}
+			}
+		}
+		game.updatePublicInfo();
+		System.out.println("A private conversation has been overheard! Nobody's "
+				+ "information is safe!");
 	}
 
 	public void tradeUpdate(Player sender, Player recep) {
@@ -27,6 +40,7 @@ public class Overheard extends ShopCard {
 	}
 
 	public void drawUpdate(Player player, Game game) {
-		
+		this.canPlay = true;
+		this.canTrade = true;
 	}
 }

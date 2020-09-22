@@ -23,12 +23,7 @@ public class Human extends Player{
 		}
 	}
 	
-	public void playTurn(Game game) {
-		if ((!this.isAlive) || (!this.isPresent)) {
-			return;
-		}
-
-		int action;
+	public void displayOptions() {
 		System.out.println("Please choose an action for your turn. "
 				+ "Alternatively, you can display any information you have.");
 		System.out.println("1. Reveal Card.");
@@ -38,6 +33,16 @@ public class Human extends Player{
 		System.out.println("5. Display Intel");
 		System.out.println("6. Display Shop");
 		System.out.println("7. Buy Card");
+		System.out.println();
+	}
+	
+	public void playTurn(Game game) {
+		if ((!this.isAlive) || (!this.isPresent)) {
+			return;
+		}
+
+		int action;
+		displayOptions();
 		
 		action = this.scan.nextInt();
 		
@@ -87,6 +92,7 @@ public class Human extends Player{
 			}
 			if (!endTurn) {
 				System.out.println("What's Next?");
+				displayOptions();
 				action = this.scan.nextInt();
 			}
 		}
@@ -149,7 +155,7 @@ public class Human extends Player{
 			}
 			if (this.hand.get(selection).canPlay) {
 				this.hand.get(selection).revealUpdate(this, game);
-				this.discardCard(this.hand.hand.remove(selection), game.discardPile);
+				this.discardCard(this.hand.remove(selection), game.discardPile);
 				validMove = true;
 			} else {
 				System.out.println("This card cannot be played... Try again.");

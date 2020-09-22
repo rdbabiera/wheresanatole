@@ -19,7 +19,14 @@ public class Uber extends ShopCard {
 	}
 
 	public void revealUpdate(Player player, Game game) {
-		
+		int i;
+		for (i=1; i<game.gameSize; i++) {
+			game.turnOrder[i].daysMissing = 0;
+			game.turnOrder[i].isPresent = true;
+		}
+		System.out.println("All players have been returned to school, "
+				+ "and anyone planning to skip has had a 'voluntary' "
+				+ "change of heart.");
 	}
 
 	public void tradeUpdate(Player sender, Player recep) {
@@ -27,6 +34,7 @@ public class Uber extends ShopCard {
 	}
 
 	public void drawUpdate(Player player, Game game) {
-		
+		this.canPlay = true;
+		this.canTrade = true;
 	}
 }

@@ -19,6 +19,7 @@ public class Game {
 	public Deck mainDeck;
 	public Deck shop;
 	public int playerSpot;
+	public int anatoleSpot;
 	
 	public ArrayList<Card> aCards;
 	public ArrayList<Card> tCards;
@@ -94,7 +95,6 @@ public class Game {
 			this.turnOrder[0] = player;
 		}
 		
-		int anatoleSpot;
 		Player anatole = null;
 		
 		if (!player.identity.equals("Anatole")) {
@@ -163,6 +163,7 @@ public class Game {
 		int currentTurn = 0;
 		int guess;
 		int victoryCheck;
+		int i, j;
 		while (currentTurn < gameSize) {
 			turnOrder[currentTurn].promptDraw(this);
 			if (currentTurn == 0) {
@@ -180,6 +181,11 @@ public class Game {
 			}
 			turnOrder[currentTurn].playTurn(this);
 			currentTurn++;
+		}
+		for (i=0; i<gameSize; i++) {
+			for (j=turnOrder[i].hand.size(); j>=0 ; j--) {
+				turnOrder[i].hand.get(j).turnUpdate(turnOrder[i], this);
+			}
 		}
 	}
 	
@@ -255,6 +261,7 @@ public class Game {
 				if (this.turnOrder[i].intel[j].team == CardTeam.UNKNOWN) {
 					this.turnOrder[i].intel[j].team = this.publicIntel[j].team;
 				}
+				this.turnOrder[i].intel[j].clout = this.publicIntel[j].clout;
 			}
 		}
 	}

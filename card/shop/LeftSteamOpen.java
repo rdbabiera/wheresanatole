@@ -18,15 +18,18 @@ public class LeftSteamOpen extends ShopCard {
 	}
 
 	public void revealUpdate(Player player, Game game) {
-		int i;
+		player.intel[game.anatoleSpot].character = Characters.ANATOLE;
+		player.intel[game.anatoleSpot].team = CardTeam.ANATOLE;
+		System.out.println("A player has discovered the location of Anatole!");
 	}
 
 	public void tradeUpdate(Player sender, Player recep) {
-		
+		this.canPlay = this.playCheck(recep);
 	}
 
 	public void drawUpdate(Player player, Game game) {
 		this.canPlay = this.playCheck(player);
+		this.canTrade = true;
 	}
 
 }

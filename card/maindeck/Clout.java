@@ -20,6 +20,8 @@ public class Clout extends Card{
 
 	public void revealUpdate(Player player, Game game) {
 		player.clout += 1;
+		game.publicIntel[player.position].clout += 1;
+		game.updatePublicInfo();
 	}
 
 	public void tradeUpdate(Player sender, Player recep) {

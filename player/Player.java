@@ -21,6 +21,10 @@ public abstract class Player {
 	public boolean skipTurn;
 	public boolean canTrade;
 	public boolean canPlay;
+	public boolean arkOverride;
+	
+	/* Other attributes */
+	public int searchDelay;
 	
 	/* Constructor */
 	public Player(Card idcard, int gameSize) {
@@ -41,6 +45,7 @@ public abstract class Player {
 		this.skipTurn = false;
 		this.canPlay = true;
 		this.canTrade = true;
+		this.arkOverride = false;
 	}
 	
 	/* Action Subroutines */
