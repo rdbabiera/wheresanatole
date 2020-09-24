@@ -30,8 +30,16 @@ public class KennethCard extends Card{
 		game.publicIntel[player.position].character = player.idcard.character;
 		game.publicIntel[player.position].team = player.team;
 		game.updatePublicInfo();
-		player.hand.hand.remove(this);
-		player.discardCard(this, game.discardPile);
+		int pos = -1;
+		int i;
+		for (i=0; i<player.hand.size(); i++) {
+			if (player.hand.get(i).equals(this)) {
+				pos = i;
+				break;
+			}
+		}
+		Card card = player.hand.remove(pos);
+		player.discardCard(card, game.discardPile);
 		System.out.println("'Kenneth, I'm sorry.' -" + player.identity);
 		System.out.println(player.identity + " is in the " + player.position + " spot.");
 	}

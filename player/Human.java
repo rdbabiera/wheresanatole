@@ -154,8 +154,9 @@ public class Human extends Player{
 				selection = this.scan.nextInt();
 			}
 			if (this.hand.get(selection).canPlay) {
-				this.hand.get(selection).revealUpdate(this, game);
-				this.discardCard(this.hand.remove(selection), game.discardPile);
+				Card card = this.hand.remove(selection);
+				card.revealUpdate(this, game);
+				this.discardCard(card, game.discardPile);
 				validMove = true;
 			} else {
 				System.out.println("This card cannot be played... Try again.");

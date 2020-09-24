@@ -20,6 +20,9 @@ public class Testing {
 			System.out.println(game.turnOrder[i].identity);
 		}
 		game.turnOrder[game.playerSpot].clout = 100;
+		Card card = new KennethCard("Ken", "Ken", CardTeam.GENERAL, Characters.ALL, PlayType.REVEAL, CardAI.NONE);
+		game.turnOrder[game.playerSpot].hand.addCard(card);
+		card.drawUpdate(game.turnOrder[game.playerSpot], game);
 		game.startDay();
 		game.startDay();
 	}

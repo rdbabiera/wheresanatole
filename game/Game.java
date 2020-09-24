@@ -183,7 +183,7 @@ public class Game {
 			currentTurn++;
 		}
 		for (i=0; i<gameSize; i++) {
-			for (j=turnOrder[i].hand.size(); j>=0 ; j--) {
+			for (j=(turnOrder[i].hand.size()-1); j>=0 ; j--) {
 				turnOrder[i].hand.get(j).turnUpdate(turnOrder[i], this);
 			}
 		}
