@@ -15,14 +15,16 @@ public class Testing {
 		
 		int i;
 		
-		Game game = new Game(3, 3);
+		Game game = new Game(5, 5);
 		for (i=0;i<game.gameSize;i++) {
 			System.out.println(game.turnOrder[i].identity);
 		}
 		game.turnOrder[game.playerSpot].clout = 100;
 		Card card = new KennethCard("Ken", "Ken", CardTeam.GENERAL, Characters.ALL, PlayType.REVEAL, CardAI.NONE);
-		game.turnOrder[game.playerSpot].hand.addCard(card);
-		card.drawUpdate(game.turnOrder[game.playerSpot], game);
+		game.mainDeck.deck.add(0, card);
+		/* card.drawUpdate(game.turnOrder[game.playerSpot], game); */
+		game.startDay();
+		game.startDay();
 		game.startDay();
 		game.startDay();
 	}

@@ -17,8 +17,16 @@ public class LaMontagne extends Card{
 
 	public void turnUpdate(Player player, Game game) {
 		if (this.character != player.idcard.character) {
-			player.hand.hand.remove(this);
-			player.discardCard(this, game.drawnSpecials);
+			int pos = -1;
+			int i;
+			for (i=0; i<player.hand.size(); i++) {
+				if (player.hand.get(i).equals(this)) {
+					pos = i;
+					break;
+				}
+			}
+			Card card = player.hand.remove(pos);
+			player.discardCard(card, game.drawnSpecials);
 		}
 	}
 

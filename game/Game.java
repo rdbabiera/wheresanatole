@@ -224,7 +224,7 @@ public class Game {
 			System.out.println("An alibi has been added to the top of the "
 					+ "deck!");
 		}
-		main.deck.add(anatole.removeCard(0));
+		main.deck.add(0, anatole.removeCard(0));
 	}
 	
 	public void addPaper(Deck main, Deck anatole) {

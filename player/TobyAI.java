@@ -1,5 +1,7 @@
 package player;
 
+import java.util.Random;
+
 import card.Card;
 import game.*;
 
@@ -17,7 +19,12 @@ public class TobyAI extends Player{
 
 
 	public int promptToby(int gameSize) {
-		return 1;
+		Random rand = new Random();
+		int guess = rand.nextInt(gameSize);
+		if (guess == 0) {
+			guess = -1;
+		}
+		return guess;
 	}
 
 	@Override

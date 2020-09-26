@@ -63,8 +63,8 @@ public abstract class Player {
 			return;
 		}
 		card = deck.removeCard(0);
-		card.drawUpdate(this, game);
 		this.hand.addCard(card);
+		card.drawUpdate(this, game);
 	}
 	
 	public void discardCard(Card card, Deck discardPile) {

@@ -26,6 +26,6 @@ public class HistoryPaper extends Card{
 	}
 
 	public void drawUpdate(Player player, Game game) {
-		
+		this.canTrade = true;
 	}
 }

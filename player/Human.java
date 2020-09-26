@@ -131,7 +131,8 @@ public class Human extends Player{
 			System.out.println("Would you like to draw from the Main deck "
 					+ "or the Special Deck? (m or s)");
 			input = this.scan.next().charAt(0);
-			while (input != 'm' || input != 's') {
+			System.out.println("Input is " + input);
+			while ((input != 'm') || (input != 's')) {
 				System.out.println("Not a valid input... Try again.");
 				input = this.scan.next().charAt(0);
 			}

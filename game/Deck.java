@@ -13,7 +13,7 @@ import card.shop.*;
 import player.Characters;
 
 public class Deck {
-	ArrayList<Card> deck;
+	public ArrayList<Card> deck;
 	
 	public Deck(String filename) {
 		String name;
@@ -133,7 +133,7 @@ public class Deck {
 							temp = new Yapstone(name, desc, team, character, pType, cAI);
 							break;				
 					}
-				} else if (filename == "alancards.csv") {
+				} else if (filename == "anatolecards.csv") {
 					switch (name) {
 						case "Alibi":
 							temp = new Alibi(name, desc, team, character, pType, cAI);
