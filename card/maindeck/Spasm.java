@@ -1,5 +1,8 @@
 package card.maindeck;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import card.Card;
 import card.CardAI;
 import card.CardTeam;
@@ -14,27 +17,41 @@ public class Spasm extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		int i;
+		Card newid;
+		ArrayList<Card> ids = new ArrayList<Card>();
+		for (i=1;i<game.gameSize;i++) {
+			ids.add(game.turnOrder[i].idcard);
+		}
+		Collections.shuffle(ids);
+		for (i=1;i<game.gameSize;i++) {
+			newid = ids.remove(0);
+			game.turnOrder[i].idcard = newid;
+			game.turnOrder[i].identity = newid.name;
+			game.turnOrder[i].team = newid.team;
+			game.publicIntel[i].character = Characters.UNKNOWN;
+			game.publicIntel[i].team = CardTeam.UNKNOWN;
+		}
+		game.updatePublicInfo();
+		System.out.println("Anatole has spasmed out to the sight of some "
+				+ "unsightly photoshoped work! Everyone will now wake up "
+				+ "Chris Breezy!");
+		System.out.println("Your new identity is now " + 
+				game.turnOrder[game.playerSpot].identity + ", and your " + 
+				"allegiance lies with " + game.turnOrder[game.playerSpot].team);
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = true;
+		this.canTrade = true;
 	}
 }

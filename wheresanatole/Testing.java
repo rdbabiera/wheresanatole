@@ -20,10 +20,12 @@ public class Testing {
 			System.out.println(game.turnOrder[i].identity);
 		}
 		game.turnOrder[game.playerSpot].clout = 100;
-		Card card = new KennethCard("Ken", "Ken", CardTeam.GENERAL, Characters.ALL, PlayType.REVEAL, CardAI.NONE);
+		Card card = new Spasm("Spasm", "Spasm", CardTeam.GENERAL, Characters.ALL, PlayType.REVEAL, CardAI.NONE);
 		game.mainDeck.deck.add(0, card);
-		/* card.drawUpdate(game.turnOrder[game.playerSpot], game); */
 		game.startDay();
+		for (i=0;i<game.gameSize;i++) {
+			System.out.println(game.turnOrder[i].identity);
+		}
 		game.startDay();
 		game.startDay();
 		game.startDay();
