@@ -37,7 +37,7 @@ public class Human extends Player{
 	}
 	
 	public void playTurn(Game game) {
-		if ((!this.isAlive) || (!this.isPresent)) {
+		if (!this.isPresent) {
 			return;
 		}
 
@@ -99,6 +99,9 @@ public class Human extends Player{
 	}
 
 	public int promptToby(int gameSize) {
+		if (!this.isPresent) {
+			return -1;
+		}
 		char input = ' ';
 		System.out.println("Would you like to guess who Anatole is? (y or n)");
 		boolean validInput = false;
@@ -126,13 +129,15 @@ public class Human extends Player{
 	}
 
 	public void promptDraw(Game game) {
+		if (!this.isPresent) {
+			return;
+		}
 		char input = 'm';
 		if (game.drawnSpecials.returnSize() > 0) {
 			System.out.println("Would you like to draw from the Main deck "
 					+ "or the Special Deck? (m or s)");
 			input = this.scan.next().charAt(0);
-			System.out.println("Input is " + input);
-			while ((input != 'm') || (input != 's')) {
+			while (input != 'm' && input != 's') {
 				System.out.println("Not a valid input... Try again.");
 				input = this.scan.next().charAt(0);
 			}
@@ -189,8 +194,15 @@ public class Human extends Player{
 					pSelect = this.scan.nextInt();
 				}
 				target = game.turnOrder[pSelect];
+				if (game.day.revealTrades) {
+					System.out.println("This trade has been snuffed out!");
+					System.out.println("Player " + this.position + " has traded the card "
+							+ card.name + " to Player " + pSelect);
+					System.out.println();
+				}
 				this.tradeCard(card, target);
 				validMove = true;
+				
 			} else {
 				System.out.println("This card cannot be traded... Try again.");
 				selection = this.scan.nextInt();
@@ -229,6 +241,24 @@ public class Human extends Player{
 				}
 			}
 		}
+	}
+
+	public boolean promptEscape() {
+		System.out.println("Would you like to skip school for the rest of "
+				+ "the day? (y or n)");
+		char response;
+		boolean res = false;
+		response = this.scan.next().charAt(0);
+		while (response != 'n' && response != 'y') {
+			System.out.println("Not a valid input... Try again");
+			response = this.scan.next().charAt(0);
+		}
+		if (response == 'n') {
+			res = false;
+		} else if (response == 'y') {
+			res = true;
+		}
+		return res;
 	}
 	
 }

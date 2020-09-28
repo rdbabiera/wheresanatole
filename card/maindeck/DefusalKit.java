@@ -15,25 +15,34 @@ public class DefusalKit extends Card{
 	}
 
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("A disciplinary commitee member has a defuser!");
+		int i,j;
+		int defuseCount = 0;
+		for (i=0;i<game.gameSize;i++) {
+			for (j=game.turnOrder[i].hand.size()-1; j>=0; j--) {
+				if (game.turnOrder[i].hand.get(j).name.equals("Snack Bomb")) {
+					System.out.println("A bomb has been defused at Site " + i);
+					defuseCount++;
+					game.turnOrder[i].hand.remove(j);
+				}
+			}
+		}
+		System.out.println(defuseCount + " bombs have been defused!");
+		for (i=0; i<defuseCount; i++) {
+			player.promptDraw(game);
+		}
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = this.playCheck(recep);
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = this.playCheck(player);
+		this.canTrade = true;
 	}
 }

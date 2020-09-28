@@ -51,10 +51,10 @@ public class Hand {
 		int i;
 		for (i=0; i<this.hand.size(); i++) {
 			if (this.hand.get(i).name.equals(str)) {
-				return 1;
+				return i;
 			}
 		}
-		return 0;
+		return -1;
 	}
 	
 	public Card get(int index) {

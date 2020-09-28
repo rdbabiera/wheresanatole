@@ -13,28 +13,38 @@ public class StinkBomb extends Card{
 			PlayType type, CardAI cAI) {
 		super(name, desc, team, character, type, cAI);
 	}
+	
+	boolean armed = false;
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		if (this.armed) {
+			return;
+		}
+		if (this.character != player.idcard.character) {
+			int pos = -1;
+			int i;
+			for (i=0; i<player.hand.size(); i++) {
+				if (player.hand.get(i).equals(this)) {
+					pos = i;
+					break;
+				}
+			}
+			Card card = player.hand.remove(pos);
+			player.discardCard(card, game.drawnSpecials);
+		}
 	}
 
-	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
-		
+		this.armed = true;
+		this.canTrade = false;
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		this.canPlay = false;
+		this.canTrade = this.tradeCheck(player);
 	}
 }

@@ -14,27 +14,33 @@ public class Reported extends Card{
 		super(name, desc, team, character, type, cAI);
 	}
 
-	@Override
 	public void turnUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		if (this.character != player.idcard.character) {
+			int pos = -1;
+			int i;
+			for (i=0; i<player.hand.size(); i++) {
+				if (player.hand.get(i).equals(this)) {
+					pos = i;
+					break;
+				}
+			}
+			Card card = player.hand.remove(pos);
+			player.discardCard(card, game.drawnSpecials);
+		}
 	}
 
-	@Override
 	public void revealUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
-		
+		game.day.revealTrades = true;
 	}
 
-	@Override
 	public void tradeUpdate(Player sender, Player recep) {
-		// TODO Auto-generated method stub
+		this.canPlay = this.playCheck(recep);
 		
 	}
 
-	@Override
 	public void drawUpdate(Player player, Game game) {
-		// TODO Auto-generated method stub
+		this.canPlay = this.playCheck(player);
+		this.canTrade = true;
 		
 	}
 }

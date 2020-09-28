@@ -20,7 +20,7 @@ Radar Jammer,Trading is banned for the day.,TOBY,TOBY,REVEAL,0,HARM
 Reported,All cards being traded must be revealed for a day. ,TOBY,ALL,REVEAL,0,HELP
 Snack Bomb,You are removed from the game if you do not trade this card by the end of the next day.,GENERAL,ALL,TRADE,0,BOMB
 Spasm,Each player draws a new identity excluding Toby.,GENERAL,ALL,REVEAL,0,BOTH
-Stink Bomb,If called on by Toby then the player is removed from school for two days. Their identity is safe and Toby is also removed from the game for two days.,GENERAL,BERNIE,TRADE,0,SAVE
+Stink Bomb,If called on by Toby then the player is removed from school for two days. Their identity is safe and Toby is also removed from the game for two days.,ANATOLE,BERNIE,TRADE,0,SAVE
 Suspension,Class-specific abilities are banned for two days.,TOBY,TOBY,REVEAL,0,HARM
 Walled Off,Force a player to discard a random card.,GENERAL,ALL,REVEAL,0,HARM
 Weekend at Bernie's,Every player has their clout set to 1.,GENERAL,ALL,REVEAL,0,HELP

@@ -15,20 +15,24 @@ public class Testing {
 		
 		int i;
 		
-		Game game = new Game(5, 5);
+		Game game = new Game(6, 6);
 		for (i=0;i<game.gameSize;i++) {
 			System.out.println(game.turnOrder[i].identity);
 		}
+		System.out.println();
 		game.turnOrder[game.playerSpot].clout = 100;
-		Card card = new Spasm("Spasm", "Spasm", CardTeam.GENERAL, Characters.ALL, PlayType.REVEAL, CardAI.NONE);
+		Card card = new Blank("Blank", "blank", CardTeam.GENERAL, Characters.ALL, PlayType.REVEAL, CardAI.NONE);
 		game.mainDeck.deck.add(0, card);
-		game.startDay();
-		for (i=0;i<game.gameSize;i++) {
-			System.out.println(game.turnOrder[i].identity);
+		game.turnOrder[game.playerSpot].promptDraw(game);
+		game.turnOrder[game.playerSpot].promptDraw(game);
+		
+		for (i=0; i<3; i++) {
+			System.out.println("Day " + i);
+			game.startDay();
+			game.updatePresence();
+			game.updateDay();
 		}
-		game.startDay();
-		game.startDay();
-		game.startDay();
+		
 	}
 }
  

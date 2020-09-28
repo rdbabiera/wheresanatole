@@ -47,6 +47,7 @@ public class BanHammer extends Card{
 		}
 		
 		game.turnOrder[selection].isAlive = false;
+		game.turnOrder[selection].isPresent = false;
 		if (game.turnOrder[selection].identity.equals("Anatole")) {
 			game.tWin = true;
 			System.out.println("Anatole has been banned from the game! Team Toby will win "

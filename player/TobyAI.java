@@ -27,28 +27,24 @@ public class TobyAI extends Player{
 		return guess;
 	}
 
-	@Override
 	public void promptDraw(Game game) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void promptReveal(Game game) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void promptTrade(Game game) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void promptBuy(Game game) {
-		// TODO Auto-generated method stub
 		
+	}
+
+	public boolean promptEscape() {
+		return false;
 	}
 
 }

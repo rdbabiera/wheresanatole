@@ -19,7 +19,9 @@ public class Blank extends Card{
 	}
 
 	public void revealUpdate(Player player, Game game) {
-		System.out.println(player.identity + " used Splash! But nothing happened!");
+		System.out.println(game.turnOrder[game.playerSpot].
+				intel[player.position].character + " used Splash! But "
+						+ "nothing happened!");
 	}
 
 	public void tradeUpdate(Player sender, Player recep) {

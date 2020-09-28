@@ -5,6 +5,7 @@ import java.util.Random;
 
 import card.*;
 import player.*;
+import card.maindeck.PinkSlip;
 
 public class Game {
 	int i;
@@ -190,16 +191,36 @@ public class Game {
 	}
 	
 	public int anatoleCheck(Player[] turnOrder, int guess) {
+		int pinkCheck = turnOrder[guess].hand.checkFor("Pink Slip");
+		int stinkCheck = turnOrder[guess].hand.checkFor("Stink Bomb");
+		if (stinkCheck >= 0) {
+			turnOrder[guess].hand.remove(stinkCheck);
+			System.out.println("A Stink Bomb has been triggered! Toby will be removed "
+					+ "from the game for two days, as well as Player " + guess);
+			turnOrder[0].isPresent = false;
+			turnOrder[0].daysMissing += 2;
+			turnOrder[guess].isPresent = false;
+			turnOrder[guess].daysMissing += 2;
+			return 0;
+		}
+		if (pinkCheck >= 0) {
+			System.out.println("Player " + guess + " has a Pink Slip, and is immune to "
+					+ "being called on...");
+			PinkSlip card = (PinkSlip)turnOrder[guess].hand.get(pinkCheck);
+			card.triggered = true;
+			return 0;
+		}
+		
 		if (!turnOrder[guess].identity.equals("Anatole")) {
 			addAlibi(this.mainDeck, this.anatoleCards);
 			return 0;
 		} else {
-			if (turnOrder[guess].hand.checkFor("History Paper") == 1) {
+			if (turnOrder[guess].hand.checkFor("History Paper") >= 0) {
 				System.out.println("Toby: 'Where's my history paper, Anatole?'");
 				System.out.println("Anatole: 'Right here.'");
 				System.out.println("Team Anatole has claimed victory!");
 				return 1;
-			} else if (turnOrder[guess].hand.checkFor("Alibi") == 1) {
+			} else if (turnOrder[guess].hand.checkFor("Alibi") >= 0) {
 				turnOrder[guess].hand.discardSpecific("Alibi");
 				System.out.println("Anatole has been found... But! He has "
 						+ "an alibi on hand. The history paper will now be "
@@ -247,7 +268,12 @@ public class Game {
 	public void updatePresence() {
 		int i;
 		for (i=0; i<this.gameSize; i++) {
-			
+			if ((this.turnOrder[i].daysMissing > 0) && (this.turnOrder[i].isAlive)) {
+				this.turnOrder[i].daysMissing--;
+				this.turnOrder[i].isPresent = false;
+			} else {
+				this.turnOrder[i].isPresent = this.turnOrder[i].isAlive;
+			}
 		}
 	}
 	

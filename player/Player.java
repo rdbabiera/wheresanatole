@@ -84,6 +84,8 @@ public abstract class Player {
 	abstract public void promptTrade(Game game);
 	abstract public void promptBuy(Game game);
 	
+	abstract public boolean promptEscape();
+	
 	public void updateHand() {
 		int i;
 		for (i=0; i<this.hand.size();i++) {
